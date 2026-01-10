@@ -1,0 +1,492 @@
+{
+  "users": [
+    {
+      "id": "c322",
+      "name": "khaleellll",
+      "email": "khaleel@123",
+      "password": "khaleel@123",
+      "isAdmin": true,
+      "cart": [
+        {
+          "productId": "5",
+          "name": "Sweatshirt",
+          "price": 1100,
+          "image": "https://media.istockphoto.com/id/1671258160/photo/sweatshirt.jpg?s=612x612&w=0&k=20&c=ebGrkd_A6-vmX6jn-eh1qxCtHYYfk0zCX8rD1aMlc_M=",
+          "description": "Comfortable cotton sweatshirt",
+          "quantity": 1
+        },
+        {
+          "productId": "7",
+          "name": "Baggy",
+          "price": 950,
+          "image": "https://media.istockphoto.com/id/1469187574/photo/ripped-jeans-on-a-white-background-womens-clothing.jpg?s=1024x1024&w=is&k=20&c=omGhnVh4wPYFI0A9ah77YjBeAgYjzNlZ0e9DfwVXerk=",
+          "description": "Baggy jeans for women",
+          "quantity": 2
+        }
+      ],
+      "wishlist": [
+        {
+          "productId": "5",
+          "name": "Sweatshirt",
+          "price": 1100,
+          "image": "https://media.istockphoto.com/id/1671258160/photo/sweatshirt.jpg?s=612x612&w=0&k=20&c=ebGrkd_A6-vmX6jn-eh1qxCtHYYfk0zCX8rD1aMlc_M=",
+          "description": "Comfortable cotton sweatshirt"
+        }
+      ],
+      "isBlock": false
+    },
+    {
+      "id": "df51",
+      "name": "varis",
+      "email": "varis@123",
+      "password": "vaaris@123",
+      "isAdmin": true,
+      "cart": [
+        {
+          "productId": "2",
+          "name": "T-Shirt",
+          "price": 700,
+          "image": "https://media.istockphoto.com/id/1097627032/photo/green-collared-shirt-design-template.jpg?s=612x612&w=0&k=20&c=LBTdxJymwABtbfkGg7zYk24nLfxqHtt52Heh7Hyn4jc=",
+          "description": "Casual cotton t-shirt",
+          "quantity": 1
+        },
+        {
+          "productId": "4",
+          "name": "Jacket",
+          "price": 1800,
+          "image": "https://media.istockphoto.com/id/1358839033/photo/jacket-autumn-spring-season-made-of-waterproof-material-with-a-hood-red-color-isolated-on-a.jpg?s=612x612&w=0&k=20&c=0QzjTSuE8RgG6y-2mV69gMOwol8SKO7R3qk8gqNxqUk=",
+          "description": "Lightweight winter jacket",
+          "quantity": 1
+        },
+        {
+          "productId": "1",
+          "name": "Hoodie",
+          "price": 1200,
+          "image": "https://media.istockphoto.com/id/1142211866/photo/back-of-sweatshirt-with-hood-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=wOze-dO22N1H-Z_aX_XVNLSJij2NJsfzGBhsVrDRa-g=",
+          "description": "Warm cotton hoodie",
+          "quantity": 1
+        }
+      ],
+      "wishlist": [
+        {
+          "productId": "2",
+          "name": "T-Shirt",
+          "price": 700,
+          "image": "https://media.istockphoto.com/id/1097627032/photo/green-collared-shirt-design-template.jpg?s=612x612&w=0&k=20&c=LBTdxJymwABtbfkGg7zYk24nLfxqHtt52Heh7Hyn4jc=",
+          "description": "Casual cotton t-shirt"
+        },
+        {
+          "productId": "3",
+          "name": "Jeans",
+          "price": 1500,
+          "image": "https://media.istockphoto.com/id/664198648/photo/jeans-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=Bs5WkbTsTtG4gFFHdNDzuUr1kj4LRb_y84OkMkxn7Dw=",
+          "description": "Slim fit denim jeans"
+        },
+        {
+          "productId": "6",
+          "name": "Dress",
+          "price": 1900,
+          "image": "https://media.istockphoto.com/id/2215130266/photo/a-wedding-dress-in-the-store.jpg?s=1024x1024&w=is&k=20&c=6l3mKYax4ffp_RNCvd3S5I2Uum3ubfgbmBNqaXeyNAQ=",
+          "description": "Elegant evening dress"
+        },
+        {
+          "productId": "8",
+          "name": "Skirt",
+          "price": 850,
+          "image": "https://media.istockphoto.com/id/872414126/photo/beautiful-blond-woman-in-violet-mini-skirt-jacket-and-sunglasses.jpg?s=612x612&w=0&k=20&c=A3WWCf0RsFJrad3uG-oI2RKm5DVT4LVwORYXRYczQ7Y=",
+          "description": "Floral printed skirt"
+        }
+      ],
+      "isBlock": false
+    },
+    {
+      "id": "50b6",
+      "name": "athif",
+      "email": "athif@123",
+      "password": "athif@123",
+      "isAdmin": false,
+      "cart": [
+        {
+          "productId": "10",
+          "name": "Pants",
+          "price": 1400,
+          "image": "https://media.istockphoto.com/id/1159334485/photo/pants-for-clothing-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=_IiB4XDQOmAFCOuPGCoXeryqDshohSOiwNt9MX257E0=",
+          "description": "Formal cotton pants",
+          "quantity": 2
+        }
+      ],
+      "wishlist": [],
+      "isBlock": false
+    },
+    {
+      "id": "7a74",
+      "name": "sajad",
+      "email": "sajad@gmail.com",
+      "password": "sajad@123",
+      "cart": [
+        {
+          "productId": "2",
+          "name": "T-Shirt",
+          "price": 700,
+          "image": "https://media.istockphoto.com/id/1097627032/photo/green-collared-shirt-design-template.jpg?s=612x612&w=0&k=20&c=LBTdxJymwABtbfkGg7zYk24nLfxqHtt52Heh7Hyn4jc=",
+          "description": "Casual cotton t-shirt",
+          "quantity": 3
+        },
+        {
+          "productId": "3",
+          "name": "Jeans",
+          "price": 1500,
+          "image": "https://media.istockphoto.com/id/664198648/photo/jeans-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=Bs5WkbTsTtG4gFFHdNDzuUr1kj4LRb_y84OkMkxn7Dw=",
+          "description": "Slim fit denim jeans",
+          "quantity": 1
+        }
+      ],
+      "wishlist": [],
+      "isBlock": false
+    },
+    {
+      "id": "ea6c",
+      "name": "athif",
+      "email": "athif@gmail.com",
+      "password": "athif@123",
+      "cart": [],
+      "wishlist": [],
+      "isBlock": false
+    },
+    {
+      "id": "9c0b",
+      "name": "safwan",
+      "email": "safwan@gmail.com",
+      "password": "safwan@123",
+      "cart": [],
+      "wishlist": []
+    },
+    {
+      "id": "094a",
+      "name": "jishnu",
+      "email": "jishnu@gmail.com",
+      "password": "jishnu@123",
+      "isAdmin": false,
+      "cart": [],
+      "wishlist": [],
+      "isBlock": false
+    },
+    {
+      "id": "2888",
+      "name": "manu",
+      "email": "manu@gmail.com",
+      "password": "manu@123",
+      "isAdmin": false,
+      "cart": [],
+      "wishlist": []
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "T-shirt",
+      "description": "Warm cotton hoodie",
+      "price": 1200,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/1142211866/photo/back-of-sweatshirt-with-hood-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=wOze-dO22N1H-Z_aX_XVNLSJij2NJsfzGBhsVrDRa-g="
+    },
+    {
+      "id": "2",
+      "name": "T-Shirt",
+      "description": "Casual cotton t-shirt",
+      "price": 700,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/1097627032/photo/green-collared-shirt-design-template.jpg?s=612x612&w=0&k=20&c=LBTdxJymwABtbfkGg7zYk24nLfxqHtt52Heh7Hyn4jc="
+    },
+    {
+      "id": "3",
+      "name": "Jeans",
+      "description": "Slim fit denim jeans",
+      "price": 1500,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/664198648/photo/jeans-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=Bs5WkbTsTtG4gFFHdNDzuUr1kj4LRb_y84OkMkxn7Dw="
+    },
+    {
+      "id": "4",
+      "name": "Jacket",
+      "description": "Lightweight winter jacket",
+      "price": 1800,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/1358839033/photo/jacket-autumn-spring-season-made-of-waterproof-material-with-a-hood-red-color-isolated-on-a.jpg?s=612x612&w=0&k=20&c=0QzjTSuE8RgG6y-2mV69gMOwol8SKO7R3qk8gqNxqUk="
+    },
+    {
+      "id": "5",
+      "name": "Sweatshirt",
+      "description": "Comfortable cotton sweatshirt",
+      "price": 1100,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/1671258160/photo/sweatshirt.jpg?s=612x612&w=0&k=20&c=ebGrkd_A6-vmX6jn-eh1qxCtHYYfk0zCX8rD1aMlc_M="
+    },
+    {
+      "id": "7",
+      "name": "Baggy",
+      "description": "Baggy jeans for women",
+      "price": 950,
+      "category": "women",
+      "image": "https://media.istockphoto.com/id/1469187574/photo/ripped-jeans-on-a-white-background-womens-clothing.jpg?s=1024x1024&w=is&k=20&c=omGhnVh4wPYFI0A9ah77YjBeAgYjzNlZ0e9DfwVXerk="
+    },
+    {
+      "id": "8",
+      "name": "Skirt",
+      "description": "Floral printed skirt",
+      "price": 850,
+      "category": "women",
+      "image": "https://media.istockphoto.com/id/872414126/photo/beautiful-blond-woman-in-violet-mini-skirt-jacket-and-sunglasses.jpg?s=612x612&w=0&k=20&c=A3WWCf0RsFJrad3uG-oI2RKm5DVT4LVwORYXRYczQ7Y="
+    },
+    {
+      "id": "9",
+      "name": "Cardigan",
+      "description": "Warm knitted cardigan",
+      "price": 1300,
+      "category": "women",
+      "image": "https://media.istockphoto.com/id/2234231972/photo/a-woman-in-white-knitted-clothes-on-a-light-background.jpg?s=612x612&w=0&k=20&c=vmE0-5e3k0ib6SR8i3AQoTRVacqO0P4hqa6UNSVfghw="
+    },
+    {
+      "id": "10",
+      "name": "Pants",
+      "description": "Formal cotton pants",
+      "price": 1400,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/1159334485/photo/pants-for-clothing-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=_IiB4XDQOmAFCOuPGCoXeryqDshohSOiwNt9MX257E0="
+    },
+    {
+      "id": "11",
+      "name": "Shirt",
+      "description": "Classic office shirt",
+      "price": 900,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/475162146/photo/shirt-isolated.jpg?s=612x612&w=0&k=20&c=pUlGMoA7M4Prz0QoEOzqT32Ok9bfogIXTKvNVWIAzPs="
+    },
+    {
+      "id": "12",
+      "name": "Casual Dress",
+      "description": "Summer casual dress",
+      "price": 1600,
+      "category": "women",
+      "image": "https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/o/01/61da264b-134c-4216-81ea-e38ab980a562.png"
+    },
+    {
+      "id": "13",
+      "name": "Tank Top",
+      "description": "Cotton tank top",
+      "price": 600,
+      "category": "women",
+      "image": "https://media.istockphoto.com/id/596382622/vector/womens-black-v-neck-t-shirt-vector-template.jpg?s=612x612&w=0&k=20&c=6lrR9E-rNBi6eiGqX_Vk_4kSQYTDdBsDwJGOXxkklE8="
+    },
+    {
+      "id": "14",
+      "name": "Hooded Jacket",
+      "description": "Waterproof hooded jacket",
+      "price": 1700,
+      "category": "men",
+      "image": "https://media.istockphoto.com/id/1263674333/photo/yellow-hooded-raincoat.jpg?s=612x612&w=0&k=20&c=ZJfFw53WWqG7VU2iCiS5TMckukrbi7eMqQlP40sGgjA="
+    },
+    {
+      "id": "15",
+      "name": "Palazzo Pants",
+      "description": " Wide-leg palazzo pants",
+      "price": 1200,
+      "category": "women",
+      "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR1vEGT3kD77Qn2x42jKhGXtEpAL9aOwh315IKG7B0Fr2E__Q80p9r1dESaqehw0RtPzkXyLIY70GjEms4qQVLFe0n0xE611Mnm_YzbWK16"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "e56b",
+      "name": "fafafa",
+      "email": "khaleelulvaris@gmail.com",
+      "message": "afa"
+    }
+  ],
+  "orders": [
+    {
+      "id": "efbf",
+      "userId": "df51",
+      "items": [
+        {
+          "productId": "2",
+          "name": "T-Shirt",
+          "price": 700,
+          "image": "https://media.istockphoto.com/id/1097627032/photo/green-collared-shirt-design-template.jpg?s=612x612&w=0&k=20&c=LBTdxJymwABtbfkGg7zYk24nLfxqHtt52Heh7Hyn4jc=",
+          "quantity": 1,
+          "description": "Casual cotton t-shirt"
+        }
+      ],
+      "total": 700,
+      "address": "dSDA",
+      "paymentMethod": "COD",
+      "status": "Delivered",
+      "date": "2025-10-09T15:24:38.569Z"
+    },
+    {
+      "id": "0224",
+      "userId": "df51",
+      "items": [
+        {
+          "productId": "3",
+          "name": "Jeans",
+          "price": 1500,
+          "image": "https://media.istockphoto.com/id/664198648/photo/jeans-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=Bs5WkbTsTtG4gFFHdNDzuUr1kj4LRb_y84OkMkxn7Dw=",
+          "quantity": 1,
+          "description": "Slim fit denim jeans"
+        }
+      ],
+      "total": 1500,
+      "address": "LLL",
+      "paymentMethod": "COD",
+      "status": "Shipped",
+      "date": "2025-10-09T15:27:56.668Z"
+    },
+    {
+      "id": "3e5d",
+      "userId": "df51",
+      "items": [
+        {
+          "productId": "6",
+          "name": "Dress",
+          "price": 1900,
+          "image": "https://media.istockphoto.com/id/2215130266/photo/a-wedding-dress-in-the-store.jpg?s=1024x1024&w=is&k=20&c=6l3mKYax4ffp_RNCvd3S5I2Uum3ubfgbmBNqaXeyNAQ=",
+          "quantity": 1,
+          "description": "Elegant evening dress"
+        },
+        {
+          "productId": "7",
+          "name": "Baggy",
+          "price": 950,
+          "image": "https://media.istockphoto.com/id/1469187574/photo/ripped-jeans-on-a-white-background-womens-clothing.jpg?s=1024x1024&w=is&k=20&c=omGhnVh4wPYFI0A9ah77YjBeAgYjzNlZ0e9DfwVXerk=",
+          "quantity": 1,
+          "description": "Baggy jeans for women"
+        },
+        {
+          "productId": "8",
+          "name": "Skirt",
+          "price": 850,
+          "image": "https://media.istockphoto.com/id/872414126/photo/beautiful-blond-woman-in-violet-mini-skirt-jacket-and-sunglasses.jpg?s=612x612&w=0&k=20&c=A3WWCf0RsFJrad3uG-oI2RKm5DVT4LVwORYXRYczQ7Y=",
+          "quantity": 1,
+          "description": "Floral printed skirt"
+        }
+      ],
+      "total": 3700,
+      "address": ";;;;",
+      "paymentMethod": "COD",
+      "status": "Placed",
+      "date": "2025-10-09T15:28:54.352Z"
+    },
+    {
+      "id": "c772",
+      "userId": "df51",
+      "items": [
+        {
+          "productId": "3",
+          "name": "Jeans",
+          "price": 1500,
+          "image": "https://media.istockphoto.com/id/664198648/photo/jeans-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=Bs5WkbTsTtG4gFFHdNDzuUr1kj4LRb_y84OkMkxn7Dw=",
+          "quantity": 1,
+          "description": "Slim fit denim jeans"
+        }
+      ],
+      "total": 1500,
+      "address": ";;",
+      "paymentMethod": "COD",
+      "status": "Placed",
+      "date": "2025-10-09T15:41:42.835Z"
+    },
+    {
+      "id": "1d40",
+      "userId": "df51",
+      "items": [
+        {
+          "productId": "2",
+          "name": "T-Shirt",
+          "price": 700,
+          "image": "https://media.istockphoto.com/id/1097627032/photo/green-collared-shirt-design-template.jpg?s=612x612&w=0&k=20&c=LBTdxJymwABtbfkGg7zYk24nLfxqHtt52Heh7Hyn4jc=",
+          "quantity": 1,
+          "description": "Casual cotton t-shirt"
+        },
+        {
+          "productId": "4",
+          "name": "Jacket",
+          "price": 1800,
+          "image": "https://media.istockphoto.com/id/1358839033/photo/jacket-autumn-spring-season-made-of-waterproof-material-with-a-hood-red-color-isolated-on-a.jpg?s=612x612&w=0&k=20&c=0QzjTSuE8RgG6y-2mV69gMOwol8SKO7R3qk8gqNxqUk=",
+          "quantity": 1,
+          "description": "Lightweight winter jacket"
+        },
+        {
+          "productId": "1",
+          "name": "Hoodie",
+          "price": 1200,
+          "image": "https://media.istockphoto.com/id/1142211866/photo/back-of-sweatshirt-with-hood-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=wOze-dO22N1H-Z_aX_XVNLSJij2NJsfzGBhsVrDRa-g=",
+          "quantity": 1,
+          "description": "Warm cotton hoodie"
+        }
+      ],
+      "total": 3700,
+      "address": "ara",
+      "paymentMethod": "COD",
+      "status": "Shipped",
+      "date": "2025-10-09T15:46:34.183Z"
+    },
+    {
+      "id": "0531",
+      "userId": "df51",
+      "items": [
+        {
+          "productId": "14",
+          "name": "Hooded Jacket",
+          "price": 1700,
+          "image": "https://media.istockphoto.com/id/1263674333/photo/yellow-hooded-raincoat.jpg?s=612x612&w=0&k=20&c=ZJfFw53WWqG7VU2iCiS5TMckukrbi7eMqQlP40sGgjA=",
+          "quantity": 1,
+          "description": "Waterproof hooded jacket"
+        }
+      ],
+      "total": 1700,
+      "address": "reara",
+      "paymentMethod": "COD",
+      "status": "Cancelled",
+      "date": "2025-10-09T15:47:04.297Z"
+    },
+    {
+      "id": "ccd1",
+      "userId": "c322",
+      "items": [
+        {
+          "productId": "2",
+          "name": "T-Shirt",
+          "price": 700,
+          "image": "https://media.istockphoto.com/id/1097627032/photo/green-collared-shirt-design-template.jpg?s=612x612&w=0&k=20&c=LBTdxJymwABtbfkGg7zYk24nLfxqHtt52Heh7Hyn4jc=",
+          "quantity": 1,
+          "description": "Casual cotton t-shirt"
+        }
+      ],
+      "total": 700,
+      "address": "fsfsf",
+      "paymentMethod": "COD",
+      "status": "Placed",
+      "date": "2025-10-09T16:40:31.765Z"
+    },
+    {
+      "id": "eb91",
+      "userId": "c322",
+      "items": [
+        {
+          "productId": "15",
+          "name": "Palazzo Pants",
+          "price": 1200,
+          "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcR1vEGT3kD77Qn2x42jKhGXtEpAL9aOwh315IKG7B0Fr2E__Q80p9r1dESaqehw0RtPzkXyLIY70GjEms4qQVLFe0n0xE611Mnm_YzbWK16",
+          "quantity": 1,
+          "description": " Wide-leg palazzo pants"
+        }
+      ],
+      "total": 1200,
+      "address": "kmm",
+      "paymentMethod": "COD",
+      "status": "Delivered",
+      "date": "2025-10-09T17:01:00.710Z"
+    }
+  ]
+}
