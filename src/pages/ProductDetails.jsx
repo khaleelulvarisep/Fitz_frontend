@@ -18,7 +18,7 @@ function ProductDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/products/${id}`)
+      .get(`http://localhost:8000/api/products/${id}/`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.error("Error fetching product details:", err));
   }, [id]);
