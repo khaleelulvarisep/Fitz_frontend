@@ -6,34 +6,34 @@ import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
 
 function Cart() {
-  const { user, updateCart, removeFromCart } = useContext(UserContext);
+  const { cart,updateCartItem, removeFromCart } = useContext(UserContext);
   const navigate = useNavigate();
 
 
-  if (!user) {
-    navigate("/login");
-    return <div className="flex flex-col items-center justify-center mt-20">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
-          alt="Empty cart"
-          className="w-32 mb-4 opacity-70"
-        />
-        <h2 className="text-xl font-semibold text-gray-600">
-          Your cart is empty
-        </h2>
-      </div>;
-  }
+  // if (!user) {
+  //   navigate("/login");
+  //   return <div className="flex flex-col items-center justify-center mt-20">
+  //       <img
+  //         src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
+  //         alt="Empty cart"
+  //         className="w-32 mb-4 opacity-70"
+  //       />
+  //       <h2 className="text-xl font-semibold text-gray-600">
+  //         Your cart is empty
+  //       </h2>
+  //     </div>;
+  // }
 
-  const cartItems = user.cart || [];
+const cartItems = cart?.items ?? [];
 
-  const handleQuantityChange = (product, delta) => {
-    const updatedCart = cartItems.map((item) =>
-      item.productId === product.productId
-        ? { ...item, quantity: Math.max(1, (item.quantity || 1) + delta) }
-        : item
-    );
-    updateCart(updatedCart);
-  };
+  // const handleQuantityChange = (product, delta) => {
+  //   const updatedCart = cartItems.map((item) =>
+  //     item.product === product.product
+  //       ? { ...item, quantity: Math.max(1, (item.quantity || 1) + delta) }
+  //       : item
+  //   );
+  //   updateCartItem(updatedCart);
+  // };
 
   const handleDelete = (productId) => {
     removeFromCart(productId);
@@ -81,14 +81,15 @@ function Cart() {
 
             <div className="flex items-center space-x-2">
               <button
-                onClick={() => {handleQuantityChange(item, -1);toast.success('Quantity chenged')}}
+                onClick={() => {updateCartItem(item.product,item.quantity-1);toast.success('Quantity chenged')}}
                 className="px-3 py-1 bg-gray-300 text-black rounded hover:bg-gray-400"
               >
                 -
+
               </button>
               <span className="px-2">{item.quantity}</span>
               <button
-                onClick={() => {handleQuantityChange(item, 1);toast.success('Quantity chenged')}}
+                onClick={() => {updateCartItem(item.product,item.quantity+1);toast.success('Quantity chenged')}}
                 className="px-3 py-1 bg-gray-300 text-black rounded hover:bg-gray-400"
               >
                 +
@@ -96,7 +97,7 @@ function Cart() {
             </div>
 
             <button
-              onClick={() => {handleDelete(item.productId);toast.warn('Item deleted')}}
+              onClick={() => {handleDelete(item.product);toast.warn('Item deleted')}}
               className="ml-4 p-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
             >
               <FaTrash />

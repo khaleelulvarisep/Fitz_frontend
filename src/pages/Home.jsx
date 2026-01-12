@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 function Home() {
   const {
     user,
+    cart,
     addToCart,
     removeFromCart,
     addToWishlist,
@@ -25,42 +26,35 @@ function Home() {
 
   useEffect(() => {
     axios
-      axios.get("http://localhost:8000/api/products/")
+      axios.get("http://localhost:8000/api/products/",{
+        headers:{
+          'Authorization': `Bearer ${localStorage.getItem('access')}`
+        }
+      })
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err));
 
   }, []);
 
-  const handleAddToCart = (product) => {
-    if (!user) {
-      toast.error("Please login to add items to cart");
-    navigate("/login");
-      return;
-    }
+  const handleAddToCart = (productId) => {
+  
 
-    const isInCart = user.cart?.some((item) => item.productId === product.id);
+    const isInCart = cart.items?.some((item) => item.product === productId);
     if (isInCart) {
-      removeFromCart(product.id);
+      removeFromCart(productId);
       toast.info('Removed from cart')
     } else {
-      addToCart({
-        productId: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        description: product.description,
-        quantity: 1,
-      });
-      toast.success("Added to cart")
+       addToCart(productId);
+  toast.success("Added to cart");
     }
   };
 
   const handleWishlistToggle = (product) => {
-    if (!user) {
-      toast.error("Please login to manage wishlist");
-      navigate("/login");
-      return;
-    }
+    // if (!user) {
+    //   toast.error("Please login to manage wishlist");
+    //   navigate("/login");
+    //   return;
+    // }
 
     const isWishlisted = user.wishlist?.some(
       (item) => item.productId === product.id
@@ -135,8 +129,8 @@ function Home() {
             const isWishlisted = user?.wishlist?.some(
               (item) => item.productId === product.id
             );
-            const isInCart = user?.cart?.some(
-              (item) => item.productId === product.id
+            const isInCart = cart?.items?.some(
+              (item) => item.product === product.id
             );
 
             return (
@@ -172,9 +166,9 @@ function Home() {
                         ? "bg-orange-600 hover:bg-orange-700"
                         : "bg-sky-600 hover:bg-sky-700"
                     }`}
-                    onClick={() => handleAddToCart(product)}
+                    onClick={() => handleAddToCart(product.id)}
                   >
-                    {isInCart ? "Remove from Cart" : "Add to Cart"}
+                    {isInCart ? "Remove" : "Add to Cart"}
                   </button>
 
                   <BuyNow product={product} />
