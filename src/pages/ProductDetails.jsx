@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user,cart, addToCart, removeFromCart, addToWishlist, removeFromWishlist } =
+  const { user,cart, addToCart,token, removeFromCart, addToWishlist, removeFromWishlist } =
     useContext(UserContext);
 
   const [product, setProduct] = useState(null);
@@ -31,11 +31,10 @@ function ProductDetails() {
   );
 
   const handleAddToCart = () => {
-    // if (!user) {
-    //   toast.error("Please login to add items to cart");
-    //   navigate("/login");
-    //   return;
-    // }
+    if(!token){
+         toast.info('Please login first');
+         navigate('/login');
+    }
 
     if (isInCart) {
       removeFromCart(product.id);

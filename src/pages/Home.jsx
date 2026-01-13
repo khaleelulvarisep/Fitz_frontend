@@ -14,9 +14,9 @@ function Home() {
     user,
     cart,
     addToCart,
+    token,
     removeFromCart,
-    addToWishlist,
-    removeFromWishlist,
+    wishlist, addToWishlist,removeFromWishlist
   } = useContext(UserContext);
 
   const [products, setProducts] = useState([]);
@@ -24,20 +24,18 @@ function Home() {
   const [categoryFilter, setCategoryFilter] = useState("all");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      axios.get("http://localhost:8000/api/products/",{
-        headers:{
-          'Authorization': `Bearer ${localStorage.getItem('access')}`
-        }
-      })
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error(err));
-
-  }, []);
+ useEffect(() => {
+  axios
+    .get("http://localhost:8000/api/products/")
+    .then((res) => setProducts(res.data))
+    .catch((err) => console.error(err));
+}, []);
 
   const handleAddToCart = (productId) => {
-  
+     if(!token){
+          toast.info('Please login first');
+          navigate('/login');
+     }
 
     const isInCart = cart.items?.some((item) => item.product === productId);
     if (isInCart) {
@@ -49,28 +47,22 @@ function Home() {
     }
   };
 
-  const handleWishlistToggle = (product) => {
-    // if (!user) {
-    //   toast.error("Please login to manage wishlist");
-    //   navigate("/login");
-    //   return;
-    // }
+  const handleWishlistToggle = (productId) => {
+    if (!token) {
+      toast.error("Please login to manage wishlist");
+      navigate("/login");
+      return;
+    }
 
-    const isWishlisted = user.wishlist?.some(
-      (item) => item.productId === product.id
+    const isWishlisted = wishlist?.items?.some(
+        (item) => item.product === productId
     );
 
     if (isWishlisted) {
-      removeFromWishlist(product.id);
+      removeFromWishlist(productId);
       toast.info('Removed from wishlist')
     } else {
-      addToWishlist({
-        productId: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        description: product.description,
-      });
+      addToWishlist(productId);
        toast.success('Added to wishlist')
     }
   };
@@ -126,8 +118,8 @@ function Home() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => {
-            const isWishlisted = user?.wishlist?.some(
-              (item) => item.productId === product.id
+             const isWishlisted = wishlist?.items?.some(
+              (item) => item.product === product.id
             );
             const isInCart = cart?.items?.some(
               (item) => item.product === product.id
@@ -140,7 +132,7 @@ function Home() {
               >
                 <div
                   className="absolute top-3 right-3 text-2xl cursor-pointer transition-transform hover:scale-110"
-                  onClick={() => handleWishlistToggle(product)}
+                  onClick={() => handleWishlistToggle(product.id)}
                 >
                   {isWishlisted ? (
                     <FaHeart className="text-pink-600" />

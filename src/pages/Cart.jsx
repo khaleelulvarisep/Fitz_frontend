@@ -1,5 +1,5 @@
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { UserContext } from "../context/UserContext";
@@ -7,34 +7,20 @@ import { toast } from "react-toastify";
 
 function Cart() {
   const { cart,updateCartItem, removeFromCart } = useContext(UserContext);
+  const token=localStorage.getItem("access");
+
   const navigate = useNavigate();
-
-
-  // if (!user) {
-  //   navigate("/login");
-  //   return <div className="flex flex-col items-center justify-center mt-20">
-  //       <img
-  //         src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
-  //         alt="Empty cart"
-  //         className="w-32 mb-4 opacity-70"
-  //       />
-  //       <h2 className="text-xl font-semibold text-gray-600">
-  //         Your cart is empty
-  //       </h2>
-  //     </div>;
-  // }
+  useEffect(
+    ()=>{
+      if(!token){
+      toast.info('Please login first');
+      navigate('/login/');
+  }
+    },[]
+  );
+  
 
 const cartItems = cart?.items ?? [];
-
-  // const handleQuantityChange = (product, delta) => {
-  //   const updatedCart = cartItems.map((item) =>
-  //     item.product === product.product
-  //       ? { ...item, quantity: Math.max(1, (item.quantity || 1) + delta) }
-  //       : item
-  //   );
-  //   updateCartItem(updatedCart);
-  // };
-
   const handleDelete = (productId) => {
     removeFromCart(productId);
   };
@@ -65,7 +51,7 @@ const cartItems = cart?.items ?? [];
 
         {cartItems.map((item) => (
           <div
-            key={item.productId}
+            key={item.product}
             className="flex items-center bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition"
           >
             <img

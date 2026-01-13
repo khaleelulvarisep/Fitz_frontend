@@ -83,8 +83,8 @@ const handleSubmit = async (e) => {
     setMessage("✅ Login successful!");
 
     setTimeout(() => {
-      navigate("/");
-    }, 1000);
+      window.location.href = "/";
+    }, 800);
 
   } catch (err) {
     console.error(err.response?.data || err.message);

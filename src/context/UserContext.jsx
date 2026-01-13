@@ -288,47 +288,78 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [cart, setCart] = useState(null);
+  const [wishlist, setWishlist] = useState(null);
+
   const[user,setUser]=useState(null)
   const [loadingCart, setLoadingCart] = useState(true);
+  const token=localStorage.getItem('access');
+  /* ================= INIT AUTH ================= */
 
-  /* ================= AUTH ================= */
-
+    // ✅ Check token on mount
   useEffect(() => {
-     fetchCart();
-     fetchUser();
-}, []);
+    const token = localStorage.getItem("access");
+    if (token) {
+      initAuth();
+    } else {
+      setLoadingCart(false);
+    }
+  }, []);
 
-  const logout = () => {
-    setCart(null);
-    setUser(null);
-    // toast.warn('User logout');
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");  
-    console.log('logout called') 
-   
-  };
-
-  const fetchUser = async () => {
+  const initAuth = async () => {
     try {
-      const res = await api.get("auth/me/");
-      setUser(res.data);
+      await fetchUser();
+      await fetchCart();
+      await fetchCart();
+      await fetchWishlist();
     } catch (err) {
-      console.error("Fetch user error", err);
+      console.error("Auth init failed", err);
+      logout();
     }
   };
 
-  /* ================= CART ================= */
+  const fetchUser = async () => {
+    const res = await api.get("auth/me/");
+    setUser(res.data);
+  };
 
   const fetchCart = async () => {
     try {
       const res = await api.get("cart/");
       setCart(res.data);
-    } catch (err) {
-      console.error("Fetch cart error", err);
     } finally {
       setLoadingCart(false);
     }
   };
+  const fetchWishlist = async () => {
+  const res = await api.get("wishlist/");
+  setWishlist(res.data);
+};
+
+
+  const logout = () => {
+    setUser(null);
+    setCart(null);
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+  };
+  /* ================= WISHLIST ================= */
+
+  const addToWishlist = async (productId) => {
+  const res = await api.post("wishlist/", {
+    product_id: productId,
+  });
+  setWishlist(res.data);
+};
+
+
+const removeFromWishlist = async (productId) => {
+  const res = await api.delete(`wishlist/item/${productId}/`);
+  setWishlist(res.data);
+};
+
+  /* ================= CART ================= */
+
+ 
 
 
   const addToCart = async (productId) => {
@@ -353,13 +384,18 @@ export const UserProvider = ({ children }) => {
       value={{
         logout,
         user,
+        token,
         setUser,
         cart,
         loadingCart,
-        fetchCart,
+        // fetchCart,
         addToCart,
         updateCartItem,
         removeFromCart,
+        wishlist,
+        fetchWishlist,
+        addToWishlist,
+        removeFromWishlist,
       }}
     >
       {children}
