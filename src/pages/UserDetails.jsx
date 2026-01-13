@@ -6,15 +6,10 @@ import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
 
 function UserProfile() {
-  const { user, setUser } = useContext(UserContext);
+  const { user,logout} = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null); 
-    toast.warn('User logout')
-    navigate("/login");
-  };
+  
 
   if (!user)
     return (
@@ -47,7 +42,11 @@ function UserProfile() {
         </button>
 
         <button
-          onClick={handleLogout}
+           onClick={() => {
+      logout();
+      navigate("/login");
+      toast.warn("Logout")
+    }}
           className="mt-4 w-full flex items-center justify-center gap-2 bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transition-all"
         >
           <FaSignOutAlt /> Logout

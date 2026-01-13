@@ -1,13 +1,13 @@
 
 
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import "../App.css"
 import { Link, useNavigate } from "react-router-dom";
-
+import { UserContext } from "../context/UserContext";
 function Navbar() {
+  const {user} = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
   
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">

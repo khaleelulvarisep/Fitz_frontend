@@ -288,22 +288,33 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [cart, setCart] = useState(null);
+  const[user,setUser]=useState(null)
   const [loadingCart, setLoadingCart] = useState(true);
 
   /* ================= AUTH ================= */
 
   useEffect(() => {
-  const token = localStorage.getItem("access");
-  if (token) {
-    fetchCart();
-  } else {
-    setLoadingCart(false);
-  }
+     fetchCart();
+     fetchUser();
 }, []);
 
   const logout = () => {
     setCart(null);
-    localStorage.clear();
+    setUser(null);
+    // toast.warn('User logout');
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");  
+    console.log('logout called') 
+   
+  };
+
+  const fetchUser = async () => {
+    try {
+      const res = await api.get("auth/me/");
+      setUser(res.data);
+    } catch (err) {
+      console.error("Fetch user error", err);
+    }
   };
 
   /* ================= CART ================= */
@@ -318,6 +329,7 @@ export const UserProvider = ({ children }) => {
       setLoadingCart(false);
     }
   };
+
 
   const addToCart = async (productId) => {
     const res = await api.post("cart/", { product_id: productId });
@@ -340,7 +352,8 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         logout,
-
+        user,
+        setUser,
         cart,
         loadingCart,
         fetchCart,

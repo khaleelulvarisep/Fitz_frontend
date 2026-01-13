@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user, addToCart, removeFromCart, addToWishlist, removeFromWishlist } =
+  const { user,cart, addToCart, removeFromCart, addToWishlist, removeFromWishlist } =
     useContext(UserContext);
 
   const [product, setProduct] = useState(null);
@@ -25,30 +25,23 @@ function ProductDetails() {
 
   if (!product) return <p className="text-center mt-20 text-gray-500">Loading...</p>;
 
-  const isInCart = user?.cart?.some((item) => item.productId === product.id);
+  const isInCart = cart?.items?.some((item) => item.product === product.id);
   const isWishlisted = user?.wishlist?.some(
     (item) => item.productId === product.id
   );
 
   const handleAddToCart = () => {
-    if (!user) {
-      toast.error("Please login to add items to cart");
-      navigate("/login");
-      return;
-    }
+    // if (!user) {
+    //   toast.error("Please login to add items to cart");
+    //   navigate("/login");
+    //   return;
+    // }
 
     if (isInCart) {
       removeFromCart(product.id);
       toast.success('Removed from cart')
     } else {
-      addToCart({
-        productId: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        description: product.description,
-        quantity: 1,
-      });
+      addToCart(product.id);
       toast.success('Added to cart')
     }
   };
