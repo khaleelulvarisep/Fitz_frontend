@@ -14,7 +14,7 @@ function Cart() {
     ()=>{
       if(!token){
       toast.info('Please login first');
-      navigate('/login/');
+      navigate('/login');
   }
     },[]
   );

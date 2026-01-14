@@ -1,5 +1,5 @@
 
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { FaTrash, FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -15,19 +15,14 @@ function Wishlist() {
              } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!token) {
-    navigate("/login");
-    return  <div className="flex flex-col items-center justify-center mt-20">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2762/2762885.png"
-          alt="Empty wishlist"
-          className="w-32 mb-4 opacity-70"
-        />
-        <h2 className="text-xl font-semibold text-gray-600">
-          Your wishlist is empty
-        </h2>
-      </div>;
-  }
+  useEffect(
+      ()=>{
+        if(!token){
+        toast.info('Please login first');
+        navigate('/login');
+    }
+      },[]
+    );
 
   const wishlistItems = wishlist?.items ?? [];
 

@@ -1,6 +1,8 @@
 
 import React from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../pages/Footer";
+
 import { Outlet } from "react-router-dom";
 
 function UserLayout() {
@@ -10,6 +12,7 @@ function UserLayout() {
       <main className="flex-grow bg-gray-50">
         <Outlet />
       </main>
+      <Footer/>
     </div>
   );
 }

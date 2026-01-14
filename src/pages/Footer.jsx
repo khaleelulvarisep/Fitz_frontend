@@ -25,11 +25,6 @@ function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/products" className="hover:text-yellow-300 transition">
-                Products
-              </Link>
-            </li>
-            <li>
               <Link to="/wishlist" className="hover:text-yellow-300 transition">
                 Wishlist
               </Link>
@@ -37,6 +32,11 @@ function Footer() {
             <li>
               <Link to="/cart" className="hover:text-yellow-300 transition">
                 Cart
+              </Link>
+            </li>
+             <li>
+              <Link to="/about" className="hover:text-yellow-300 transition">
+                About
               </Link>
             </li>
             <li>

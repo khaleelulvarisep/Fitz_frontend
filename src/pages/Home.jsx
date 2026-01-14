@@ -5,7 +5,6 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
 import FashionCarousel from "../components/FashionCarousel";
-import Footer from "./Footer";
 import BuyNow from "../components/BuyNow";
 import { toast } from "react-toastify";
 
@@ -175,7 +174,7 @@ function Home() {
         )}
       </div>                  
                             
-      <Footer />
+      
     </div>
   );
 }
