@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user,cart, addToCart,token, removeFromCart, addToWishlist, removeFromWishlist } =
+  const { user,cart, addToCart,token, removeFromCart, addToWishlist, removeFromWishlist ,wishlist} =
     useContext(UserContext);
 
   const [product, setProduct] = useState(null);
@@ -26,8 +26,8 @@ function ProductDetails() {
   if (!product) return <p className="text-center mt-20 text-gray-500">Loading...</p>;
 
   const isInCart = cart?.items?.some((item) => item.product === product.id);
-  const isWishlisted = user?.wishlist?.some(
-    (item) => item.productId === product.id
+  const isWishlisted = wishlist?.items?.some(
+    (item) => item.product === product.id
   );
 
   const handleAddToCart = () => {
@@ -46,7 +46,7 @@ function ProductDetails() {
   };
 
   const handleWishlistToggle = () => {
-    if (!user) {
+    if (!token) {
       toast.error("Please login to manage wishlist");
       navigate("/login");
       return;
@@ -56,13 +56,7 @@ function ProductDetails() {
       removeFromWishlist(product.id);
       toast.success('Removed from wishlist')
     } else {
-      addToWishlist({
-        productId: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        description: product.description,
-      });
+      addToWishlist(product.id);
       toast.success('Added to wishlist')
     }
   };
