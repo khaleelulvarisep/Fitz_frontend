@@ -11,12 +11,12 @@ function UserProfile() {
 
   
 
-  if (!user)
-    return (
-      <div className="flex justify-center items-center h-screen text-red-600 text-lg font-medium">
-        No user found. Please log in.
-      </div>
-    );
+  // if (!user)
+  //   return (
+  //     <div className="flex justify-center items-center h-screen text-red-600 text-lg font-medium">
+  //       No user found. Please log in.
+  //     </div>
+  //   );
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-sky-50 to-sky-100 py-10">
@@ -35,7 +35,7 @@ function UserProfile() {
         </button>
 
         <button
-          onClick={() => navigate("/Uorders")}
+          onClick={() => navigate("/orders")}
           className="mt-4 w-full flex items-center justify-center gap-2 bg-white text-blue-600 border border-blue-600 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all"
         >
           <FaClipboardList /> View Orders

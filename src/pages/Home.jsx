@@ -162,7 +162,12 @@ function Home() {
                     {isInCart ? "Remove" : "Add to Cart"}
                   </button>
 
-                  <BuyNow product={product} />
+                   <button
+                      onClick={() => navigate("/checkout", { state: { product } })}
+                      className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+                   >
+                          Buy Now
+                   </button>
                 </div>
               </div>
             );

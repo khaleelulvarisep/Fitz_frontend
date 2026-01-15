@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
+import OrderDetail from "./pages/OrderDetail";
 import UserDetails from "./pages/UserDetails";
 import EditUser from "./pages/EditUser";
 import ProductDetails from "./pages/ProductDetails";
@@ -52,7 +53,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/Uorders" element={<Orders />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/user" element={<UserDetails />} />
           <Route path="/edit-user" element={<EditUser />} />
           <Route path="/product/:id" element={<ProductDetails/>} />
