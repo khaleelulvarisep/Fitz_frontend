@@ -61,18 +61,54 @@ function Checkout() {
       }
 
       // 👉 ONLINE PAYMENT (Razorpay)
-      const options = {
-        key: res.data.key,
-        amount: res.data.amount * 100,
-        currency: "INR",
-        name: "FiTz.",
-        order_id: res.data.razorpay_order_id,
-        handler: async (response) => {
+      // const options = {
+      //   key: res.data.key,
+      //   amount: res.data.amount * 100,
+      //   currency: "INR",
+      //   name: "FiTz.",
+      //   order_id: res.data.razorpay_order_id,
+      //   handler: async (response) => {
+      //     await api.post("orders/verify/", response);
+      //     toast.success("Payment successful!");
+      //     navigate("/orders"); // ✅ redirect
+      //   },
+      // };
+      // 👉 ONLINE PAYMENT
+    const options = {
+      key: res.data.key,
+      amount: res.data.amount * 100,
+      currency: "INR",
+      name: "FiTz.",
+      description: "Order Payment",
+      order_id: res.data.razorpay_order_id,
+
+      handler: async function (response) {
+        try {
           await api.post("orders/verify/", response);
           toast.success("Payment successful!");
-          navigate("/orders"); // ✅ redirect
+          navigate("/orders");
+        } catch (err) {
+          console.error("Verify failed", err);
+          toast.error("Payment verification failed");
+        }
+      },
+
+      modal: {
+        ondismiss: function () {
+          toast.info("Payment cancelled");
         },
-      };
+      },
+
+      prefill: {
+        name: form.full_name,
+        email: "",
+        contact: form.phone,
+      },
+
+      theme: {
+        color: "#16a34a",
+      },
+    };
 
       const razorpay = new window.Razorpay(options);
       razorpay.open();
