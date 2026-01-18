@@ -11,7 +11,7 @@ function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 🔹 If product exists → Buy Now
+  //  If product exists → Buy Now
   const buyNowProduct = location.state?.product || null;
 
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -29,7 +29,7 @@ function Checkout() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Calculate total
+  //  Calculate total
   const total = buyNowProduct
     ? buyNowProduct.price
     : cart?.items?.reduce(
