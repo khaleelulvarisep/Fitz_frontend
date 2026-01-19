@@ -2,62 +2,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     if (!email || !password) {
-//       setMessage("⚠️ Please enter both email and password");
-//       return;
-//     }
-
-//     try {
-//       // const res = await axios.get(
-//       //   `http://localhost:5000/users?email=${email}&password=${password}`
-//       // );
-//       const res = await axios.post(
-//   "http://localhost:8000/api/auth/login/",
-//   {
-//     email: email, // or username if you prefer
-//     password: password,
-//   }
-// );
-
-// localStorage.setItem("access", res.data.access);
-// localStorage.setItem("refresh", res.data.refresh);//neww
-
-
-//       if (res.data.length === 0) {
-//         setMessage(" Invalid email or password");
-//         return;
-//       }
-
-//       const user = res.data[0];
-
-//       if (user.isBlock) {
-//         setMessage("You are blocked by admin. Please contact support.");
-//         return;
-//       }
-
-//       setMessage("✅ Login successful!");
-//       localStorage.setItem("user", JSON.stringify(user));
-
-//       setTimeout(() => {
-//         navigate("/");
-//       }, 1000);
-//     } catch (err) {
-//       console.error(err);
-//       setMessage( "Error logging in. Please try again later.");
-//     }
-//   };
-
-
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -81,19 +32,20 @@ const handleSubmit = async (e) => {
     localStorage.setItem("refresh", res.data.refresh);
 
     setMessage("✅ Login successful!");
+    toast.success("Login sussess.");
 
     setTimeout(() => {
       window.location.href = "/";
     }, 800);
 
   } catch (err) {
-    console.error(err.response?.data || err.message);
+     const msg =
+    err.response?.data?.detail ||
+    err.response?.data?.error ||
+    "Login failed. Please try again.";
+    setMessage(`❌ ${msg}` );
 
-    if (err.response?.status === 401) {
-      setMessage("❌ Invalid email or password");
-    } else {
-      setMessage("❌ Server error. Try again later.");
-    }
+   
   }
 };
 
