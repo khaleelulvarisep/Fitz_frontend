@@ -3,6 +3,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
+import api from "../api/axios";
+
 import {
   FaUserShield,
   FaUserSlash,
@@ -36,15 +38,18 @@ function ManageUsers() {
 
   const toggleBlock = async (user) => {
     try {
-      const updatedUser = { ...user, isBlock: !user.isBlock };
-      await axios.patch(`http://localhost:5000/users/${user.id}`, updatedUser);
+      // const updatedUser = { ...user, isBlock: !user.isBlock };
+      // await axios.patch(`http://localhost:5000/users/${user.id}`, updatedUser);
+      await api.patch(`admin/users/${user.id}/block/`,{
+        'is_active':!user.is_active
+      });
       fetchAllData();
-      if (selectedUser?.id === user.id) setSelectedUser(updatedUser);
-      if(updatedUser.isBlock){
-        toast.error('User blocked')
-      }else{
-        toast.success('User unblocked')
-      }
+      // if (selectedUser?.id === user.id) setSelectedUser(updatedUser);
+      // if(updatedUser.isBlock){
+      //   toast.error('User blocked')
+      // }else{
+      //   toast.success('User unblocked')
+      // }
     } catch (err) {
       console.error("Error toggling block:", err);
     }
@@ -100,10 +105,10 @@ function ManageUsers() {
                     <p className="font-semibold text-gray-800">{u.name}</p>
                     <p
                       className={`text-xs font-medium ${
-                        u.isBlock ? "text-red-500" : "text-green-600"
+                        !u.is_active ? "text-red-500" : "text-green-600"
                       }`}
                     >
-                      {u.isBlock ? "Blocked" : "Active"}
+                      {u.is_active ? "Active":"Blocked"}
                     </p>
                   </div>
 
@@ -113,18 +118,18 @@ function ManageUsers() {
                       toggleBlock(u);
                     }}
                     className={`flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium shadow-md transition-all ${
-                      u.isBlock
+                      !u.is_active
                         ? "bg-green-100 text-green-700 hover:bg-green-200"
                         : "bg-red-100 text-red-700 hover:bg-red-200"
                     }`}
                   >
-                    {u.isBlock ? (
+                    {u.is_active ? (
                       <>
-                        <FaCheckCircle /> Unblock
+                        <FaCheckCircle /> Block
                       </>
                     ) : (
                       <>
-                        <FaBan /> Block
+                        <FaBan /> Unblock
                       </>
                     )}
                   </button>
