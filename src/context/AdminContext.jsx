@@ -26,7 +26,7 @@ export function AdminProvider({ children }) {
       setProducts(productsRes.data);
       setOrders(ordersRes.data);
       setContacts(contactsRes.data);
-    } catch (err) {
+    } catch (err) { 
       console.error("Error fetching admin data:", err);
     } finally {
       setLoading(false);

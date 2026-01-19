@@ -1,102 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-
-// function AdminDashboard() {
-//   const [users, setUsers] = useState([]);
-//   const [orders, setOrders] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-
-//   const fetchData = async () => {
-//     try {
-//       const [usersRes, ordersRes] = await Promise.all([
-//         axios.get("http://localhost:5000/users"),
-//         axios.get("http://localhost:5000/orders"),
-//       ]);
-//       setUsers(usersRes.data);
-//       setOrders(ordersRes.data);
-//     } catch (err) {
-//       console.error("Error fetching dashboard data:", err);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-//   const totalRevenue = orders.reduce((sum, order) => sum + (order.total || 0), 0);
-//   const activeUsers = users.filter((u) => !u.isBlock).length;
-//   const recentOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
-
-//   if (loading) return <h2 className="text-center mt-10 text-lg">Loading dashboard...</h2>;
-
-//   return (
-//     <div className="p-6 min-h-screen bg-gray-50">
-//       <h1 className="text-3xl font-bold text-gray-800 mb-8">Manage Users</h1>
-
-//       {/* 🧩 Stats Overview */}
-//       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6 mb-10">
-//         <div className="bg-white shadow rounded-xl p-5 border-t-4 border-sky-500">
-//           <h2 className="text-gray-600 text-sm font-semibold">Total Users</h2>
-//           <p className="text-3xl font-bold text-sky-600 mt-2">{users.length}</p>
-//         </div>
-
-//         <div className="bg-white shadow rounded-xl p-5 border-t-4 border-green-500">
-//           <h2 className="text-gray-600 text-sm font-semibold">Active Users</h2>
-//           <p className="text-3xl font-bold text-green-600 mt-2">{activeUsers}</p>
-//         </div>
-
-//         <div className="bg-white shadow rounded-xl p-5 border-t-4 border-yellow-500">
-//           <h2 className="text-gray-600 text-sm font-semibold">Total Orders</h2>
-//           <p className="text-3xl font-bold text-yellow-600 mt-2">{orders.length}</p>
-//         </div>
-
-//         <div className="bg-white shadow rounded-xl p-5 border-t-4 border-purple-500 col-span-2">
-//           <h2 className="text-gray-600 text-sm font-semibold">Total Revenue</h2>
-//           <p className="text-3xl font-bold text-purple-600 mt-2">₹{totalRevenue.toLocaleString()}</p>
-//         </div>
-//       </div>
-
-//       {/* 📝 Recent Orders */}
-//       <div className="bg-white shadow rounded-xl p-6">
-//         <h2 className="text-xl font-bold text-gray-800 mb-4">Recent Orders</h2>
-//         {recentOrders.length === 0 ? (
-//           <p className="text-gray-500">No orders yet.</p>
-//         ) : (
-//           <ul className="divide-y">
-//             {recentOrders.map((order) => (
-//               <li key={order.id} className="flex justify-between items-center py-3 px-2 hover:bg-gray-50 rounded-lg">
-//                 <div>
-//                   <p className="font-semibold text-gray-800">Order ID: {order.id}</p>
-//                   <p className="text-sm text-gray-500">{order.name || order.customer?.fullName}</p>
-//                 </div>
-//                 <div>
-//                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-//                     order.status === "Pending"
-//                       ? "bg-yellow-200 text-yellow-800"
-//                       : order.status === "Shipped"
-//                       ? "bg-blue-200 text-blue-800"
-//                       : order.status === "Delivered"
-//                       ? "bg-green-200 text-green-800"
-//                       : "bg-gray-200 text-gray-800"
-//                   }`}>
-//                     {order.status}
-//                   </span>
-//                 </div>
-//               </li>
-//             ))}
-//           </ul>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default AdminDashboard;
-
-
-
-
 
 import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../context/AdminContext"; // adjust path if needed
@@ -115,7 +16,7 @@ function AdminDashboard() {
   };
 
   // 📊 Calculations
-  const totalUsers = users.length;
+  const totalUsers = users.length; 
   const totalOrders = orders.length;
   const totalRevenue = orders.reduce((sum, order) => sum + (order.total || 0), 0);
   const recentOrders = [...orders]

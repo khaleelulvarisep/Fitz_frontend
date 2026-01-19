@@ -44,7 +44,7 @@ function Navbar() {
               Contact
             </Link>
           </li>
-            {user?.isAdmin && (
+            {user?.is_staff&& (
               <li>
           <Link
             to="/admin"
