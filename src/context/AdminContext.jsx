@@ -1,7 +1,7 @@
 
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-
+import api from "../api/axios";
 export const AdminContext = createContext();
 
 export function AdminProvider({ children }) {
@@ -15,24 +15,19 @@ export function AdminProvider({ children }) {
 
   const fetchAllData = async () => {
     setLoading(true);
-    try {
-      const [usersRes, productsRes, ordersRes, contactsRes] = await Promise.all([
-        axios.get(`${BASE_URL}/users`),
-        axios.get(`${BASE_URL}/products`),
-        axios.get(`${BASE_URL}/orders`),
-        axios.get(`${BASE_URL}/contacts`),
-      ]);
-      setUsers(usersRes.data);
-      setProducts(productsRes.data);
-      setOrders(ordersRes.data);
-      setContacts(contactsRes.data);
-    } catch (err) { 
+    try{
+      await fetchUsers();
+    }catch(err){
       console.error("Error fetching admin data:", err);
     } finally {
       setLoading(false);
     }
+   
   };
-
+  const fetchUsers=async ()=>{
+    const res=await api.get('admin/users');
+    setUsers(res.data)
+  }
   useEffect(() => {
     fetchAllData();
   }, []);
