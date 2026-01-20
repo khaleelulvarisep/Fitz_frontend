@@ -17,6 +17,7 @@ export function AdminProvider({ children }) {
     setLoading(true);
     try{
       await fetchUsers();
+      await fetchProducts();
     }catch(err){
       console.error("Error fetching admin data:", err);
     } finally {
@@ -26,20 +27,25 @@ export function AdminProvider({ children }) {
   };
   const fetchUsers=async ()=>{
     const res=await api.get('admin/users');
-    setUsers(res.data)
+    setUsers(res.data);
+  }
+
+  const fetchProducts=async ()=>{
+    const res=await api.get('admin/products');
+    setProducts(res.data);
   }
   useEffect(() => {
     fetchAllData();
   }, []);
 
-  const addProduct = async (product) => {
-    try {
-      const res = await axios.post(`${BASE_URL}/products`, product);
-      setProducts((prev) => [...prev, res.data]);
-    } catch (err) {
-      console.error("Error adding product:", err);
-    }
-  };
+  // const addProduct = async (product) => {
+  //   try {
+  //     const res = await axios.post(`${BASE_URL}/products`, product);
+  //     setProducts((prev) => [...prev, res.data]);
+  //   } catch (err) {
+  //     console.error("Error adding product:", err);
+  //   }
+  // };
 
   const deleteProduct = async (id) => {
     try {
@@ -86,9 +92,9 @@ export function AdminProvider({ children }) {
         contacts,
         loading,
         fetchAllData,
-        addProduct,
-        deleteProduct,
+        // addProduct,
         editProduct,
+        deleteProduct,
         deleteUser,
         deleteContact,
       }}

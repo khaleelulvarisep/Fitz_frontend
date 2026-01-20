@@ -45,7 +45,8 @@ function ManageProducts() {
             🛍️ Manage Products
           </h2>
           <span className="text-gray-600 text-sm bg-sky-100 px-4 py-1 rounded-full shadow-sm">
-            Total Products: <b>{products.length}</b>
+            Total Products:<b>{products?.length || 0}</b>
+
           </span>
         </div>
 
