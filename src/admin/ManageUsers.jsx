@@ -38,18 +38,17 @@ function ManageUsers() {
 
   const toggleBlock = async (user) => {
     try {
-      // const updatedUser = { ...user, isBlock: !user.isBlock };
-      // await axios.patch(`http://localhost:5000/users/${user.id}`, updatedUser);
+      
       await api.patch(`admin/users/${user.id}/block/`,{
         'is_active':!user.is_active
       });
       fetchAllData();
       // if (selectedUser?.id === user.id) setSelectedUser(updatedUser);
-      // if(updatedUser.isBlock){
-      //   toast.error('User blocked')
-      // }else{
-      //   toast.success('User unblocked')
-      // }
+      if(user.is_active){
+        toast.error('User blocked')
+      }else{
+        toast.success('User unblocked')
+      }
     } catch (err) {
       console.error("Error toggling block:", err);
     }
@@ -155,12 +154,12 @@ function ManageUsers() {
                     </h3>
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                        selectedUser.isBlock
+                        !selectedUser.is_active
                           ? "bg-red-100 text-red-700"
                           : "bg-green-100 text-green-700"
                       }`}
                     >
-                      {selectedUser.isBlock ? "Blocked" : "Active"}
+                      {!selectedUser.is_active ? "Blocked" : "Active"}
                     </span>
                   </div>
 
