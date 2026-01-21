@@ -20,6 +20,7 @@ export function AdminProvider({ children }) {
     try{
       await fetchUsers();
       await fetchProducts();
+      await fetchOrders();
     }catch(err){
       console.error("Error fetching admin data:", err);
     } finally {
@@ -34,6 +35,10 @@ export function AdminProvider({ children }) {
 
   const fetchProducts=async ()=>{
     const res=await api.get('admin/products');
+    setProducts(res.data);
+  }
+  const fetchOrders=async ()=>{
+    const res=await api.get('admin/orders');
     setProducts(res.data);
   }
   useEffect(() => {
