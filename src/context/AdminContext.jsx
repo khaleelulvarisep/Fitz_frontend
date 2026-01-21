@@ -39,7 +39,7 @@ export function AdminProvider({ children }) {
   }
   const fetchOrders=async ()=>{
     const res=await api.get('admin/orders');
-    setProducts(res.data);
+    setOrders(res.data);
   }
   useEffect(() => {
     fetchAllData();

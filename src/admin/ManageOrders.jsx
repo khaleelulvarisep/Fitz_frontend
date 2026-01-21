@@ -38,7 +38,7 @@ function ManageOrders() {
 
       <div className="grid gap-6">
         {orders.map((order) => {
-          const user = users.find((u) => u.id.toString() === order.userId.toString());
+          const user = users.find((u) => u.id.toString() === order.user.toString());
           return (
             <div
               key={order.id}
@@ -64,8 +64,8 @@ function ManageOrders() {
               <div className="text-sm text-gray-700">
                 <p><strong>User:</strong> {user?.name || "Unknown"}</p>
                 <p><strong>Email:</strong> {user?.email || "N/A"}</p>
-                <p><strong>Payment:</strong> {order.paymentMethod || order.payment || "N/A"}</p>
-                <p><strong>Date:</strong> {new Date(order.date).toLocaleString()}</p>
+                <p><strong>Payment:</strong> {order.payment_method || order.payment || "N/A"}</p>
+                <p><strong>Date:</strong> {new Date(order.created_at).toLocaleString()}</p>
               </div>
 
               <div className="mt-4 flex justify-between items-center">
@@ -108,7 +108,7 @@ function ManageOrders() {
             <h2 className="text-2xl font-semibold mb-4">Order Details</h2>
             {(() => {
               const user = users.find(
-                (u) => u.id.toString() === selectedOrder.userId.toString()
+                (u) => u.id.toString() === selectedOrder.user.toString()
               );
               return (
                 <>
@@ -117,9 +117,9 @@ function ManageOrders() {
                     <p><strong>User Name:</strong> {user?.name || "Unknown"}</p>
                     <p><strong>Email:</strong> {user?.email || "N/A"}</p>
                     <p><strong>Address:</strong> {selectedOrder.address || "N/A"}</p>
-                    <p><strong>Payment Method:</strong> {selectedOrder.paymentMethod || selectedOrder.payment || "N/A"}</p>
+                    <p><strong>Payment Method:</strong> {selectedOrder.payment_method || selectedOrder.payment || "N/A"}</p>
                     <p><strong>Status:</strong> {selectedOrder.status}</p>
-                    <p><strong>Date:</strong> {new Date(selectedOrder.date).toLocaleString()}</p>
+                    <p><strong>Date:</strong> {new Date(selectedOrder.created_at).toLocaleString()}</p>
                   </div>
                   
 
