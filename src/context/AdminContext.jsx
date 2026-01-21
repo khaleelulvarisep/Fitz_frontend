@@ -54,6 +54,18 @@ export function AdminProvider({ children }) {
       console.error("Error adding product:", err);
     }
   };
+   const handleStatusChange = async (id, newStatus) => {
+      
+         try {
+      await api.patch(`admin/orders/${id}/status/`, {
+        status: newStatus,
+      });
+      toast.success("Order status updated");
+      fetchOrders(); // refresh list
+    } catch (err) {
+      toast.error("Failed to update status");
+    }
+    };
 
   const deleteProduct = async (id) => {
     try {
@@ -102,6 +114,7 @@ export function AdminProvider({ children }) {
         contacts,
         loading,
         fetchAllData,
+        handleStatusChange,
         addProduct,
         editProduct,
         deleteProduct,

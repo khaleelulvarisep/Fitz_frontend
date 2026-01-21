@@ -39,6 +39,10 @@ function Orders() {
             Payment:{" "}
             <span className="font-medium">{order.payment_status}</span>
           </p>
+           <p className="text-sm">
+            Order:{" "}
+            <span className="font-medium">{order.status}</span>
+          </p>
         </div>
       ))}
     </div>

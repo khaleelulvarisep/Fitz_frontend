@@ -22,8 +22,8 @@ function OrderDetail() {
         <p><b>Name:</b> {order.full_name}</p>
         <p><b>Phone:</b> {order.phone}</p>
         <p><b>Address:</b> {order.address}, {order.city}</p>
-        <p><b>Payment:</b> {order.payment_method}</p>
-        <p><b>Status:</b> {order.payment_status}</p>
+        <p><b>Payment:</b> {order.payment_status}</p>
+        <p><b>Order:</b> {order.status}</p>
       </div>
 
       <h3 className="text-xl font-semibold mb-3">Items</h3>

@@ -6,35 +6,22 @@ import { toast } from "react-toastify";
 import api from "../api/axios";
 
 function ManageOrders() {
-  const { orders, users, loading, fetchAllData } = useContext(AdminContext);
+  const { orders, users, loading, handleStatusChange } = useContext(AdminContext);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   // Update order status using Axios (string-safe)
-  const handleStatusChange = async (id, newStatus) => {
-    // try {
-    //   // Convert both IDs to strings for safe comparison
-    //   const order = orders.find((o) => o.id.toString() === id.toString());
-    //   if (!order) return;
-
-    //   await axios.patch(`http://localhost:5000/orders/${order.id}`, {
-    //     status: newStatus,
-    //   });
-    //   toast.success(`oreder ${newStatus}`)
-
-    //   await fetchAllData(); // refresh orders
-    // } catch (err) {
-    //   console.error("Error updating order:", err);
-    // }
-       try {
-    await api.patch(`admin/orders/${id}/status/`, {
-      status: newStatus,
-    });
-    toast.success("Order status updated");
-    fetchAllData(); // refresh list
-  } catch (err) {
-    toast.error("Failed to update status");
-  }
-  };
+  // const handleStatusChange = async (id, newStatus) => {
+    
+  //      try {
+  //   await api.patch(`admin/orders/${id}/status/`, {
+  //     status: newStatus,
+  //   });
+  //   toast.success("Order status updated");
+  //   fetchAllData(); // refresh list
+  // } catch (err) {
+  //   toast.error("Failed to update status");
+  // }
+  // };
 
   const closeModal = () => setSelectedOrder(null);
 
@@ -64,6 +51,8 @@ function ManageOrders() {
                       ? "bg-blue-200 text-blue-800"
                       : order.status.toLowerCase() === "delivered"
                       ? "bg-green-200 text-green-800"
+                      : order.status === "CANCELLED"
+                      ? "bg-red-200 text-red-800"
                       : "bg-gray-200 text-gray-800"
                   }`}
                 >

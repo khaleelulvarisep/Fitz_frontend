@@ -18,10 +18,10 @@ function AdminDashboard() {
   // 📊 Calculations
   const totalUsers = users.length; 
   const totalOrders = orders.length;
-  const totalRevenue = orders.reduce((sum, order) => sum + (order.total || 0), 0);
+  const totalRevenue = orders.reduce((sum, order) => sum + (order.total_amount || 0), 0);
   const recentOrders = [...orders]
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 6); // show latest 6 orders
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    .slice(0, 5); // show latest 6 orders
 
   if (loading) {
     return (
@@ -94,29 +94,29 @@ function AdminDashboard() {
                       {order.id}
                     </td>
                     <td className="p-3 border-t text-gray-700">
-                      {getUserDetails(order.userId)}
+                      {getUserDetails(order.user)}
                     </td>
                     <td className="p-3 border-t font-semibold text-green-600">
-                      ₹{order.total}
+                      ₹{order.total_amount}
                     </td>
                     <td className="p-3 border-t text-gray-500">
-                      {new Date(order.date).toLocaleString()}
+                      {new Date(order.created_at).toLocaleString()}
                     </td>
                     <td className="p-3 border-t">
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          order.status === "Placed"
+                          order.status === "PLACED"
                             ? "bg-yellow-200 text-yellow-800"
-                            : order.status === "Shipped"
+                            : order.status === "SHIPPED"
                             ? "bg-blue-200 text-blue-800"
-                            : order.status === "Delivered"
+                            : order.status === "DELIVERED"
                             ? "bg-green-200 text-green-800"
-                            : order.status === "Cancelled"
+                            : order.status === "CANCELLED"
                             ? "bg-red-200 text-red-800"
                             : "bg-gray-200 text-gray-800"
                         }`}
                       >
-                        {order.status}
+                        {order.status.toLowerCase()}
                       </span>
                     </td>
                   </tr>
