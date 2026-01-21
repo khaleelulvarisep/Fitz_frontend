@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AdminContext } from "../context/AdminContext";
 import { toast } from "react-toastify";
+import api from "../api/axios";
 
 function ManageOrders() {
   const { orders, users, loading, fetchAllData } = useContext(AdminContext);
@@ -10,20 +11,29 @@ function ManageOrders() {
 
   // Update order status using Axios (string-safe)
   const handleStatusChange = async (id, newStatus) => {
-    try {
-      // Convert both IDs to strings for safe comparison
-      const order = orders.find((o) => o.id.toString() === id.toString());
-      if (!order) return;
+    // try {
+    //   // Convert both IDs to strings for safe comparison
+    //   const order = orders.find((o) => o.id.toString() === id.toString());
+    //   if (!order) return;
 
-      await axios.patch(`http://localhost:5000/orders/${order.id}`, {
-        status: newStatus,
-      });
-      toast.success(`oreder ${newStatus}`)
+    //   await axios.patch(`http://localhost:5000/orders/${order.id}`, {
+    //     status: newStatus,
+    //   });
+    //   toast.success(`oreder ${newStatus}`)
 
-      await fetchAllData(); // refresh orders
-    } catch (err) {
-      console.error("Error updating order:", err);
-    }
+    //   await fetchAllData(); // refresh orders
+    // } catch (err) {
+    //   console.error("Error updating order:", err);
+    // }
+       try {
+    await api.patch(`admin/orders/${id}/status/`, {
+      status: newStatus,
+    });
+    toast.success("Order status updated");
+    fetchAllData(); // refresh list
+  } catch (err) {
+    toast.error("Failed to update status");
+  }
   };
 
   const closeModal = () => setSelectedOrder(null);
@@ -76,10 +86,10 @@ function ManageOrders() {
                     onChange={(e) => handleStatusChange(order.id, e.target.value)}
                     className="border rounded p-1"
                   >
-                    <option value="Placed">Placed</option>
-                    <option value="Shipped">Shipped</option>
-                    <option value="Delivered">Delivered</option>
-                    <option value="Cancelled">Cancelled</option>
+                    <option value="PLACED">Placed</option>
+                    <option value="SHIPPED">Shipped</option>
+                    <option value="DELIVERED">Delivered</option>
+                    <option value="CANCELLED">Cancelled</option>
                   </select>
                 </div>
 
@@ -118,6 +128,7 @@ function ManageOrders() {
                     <p><strong>Email:</strong> {user?.email || "N/A"}</p>
                     <p><strong>Address:</strong> {selectedOrder.address || "N/A"}</p>
                     <p><strong>Payment Method:</strong> {selectedOrder.payment_method || selectedOrder.payment || "N/A"}</p>
+                    <p><strong>Status:</strong> {selectedOrder.payment_status|| "N/A"}</p>
                     <p><strong>Status:</strong> {selectedOrder.status}</p>
                     <p><strong>Date:</strong> {new Date(selectedOrder.created_at).toLocaleString()}</p>
                   </div>
@@ -134,7 +145,7 @@ function ManageOrders() {
                             className="w-16 h-16 object-cover rounded"
                           />
                           <div>
-                            <p className="font-semibold">{item.name}</p>
+                            <p className="font-semibold">{item.product_name}</p>
                             <p>₹{item.price} × {item.quantity}</p>
                             {item.description && <p className="text-xs text-gray-500">{item.description}</p>}
                           </div>
@@ -145,8 +156,8 @@ function ManageOrders() {
                     )}
                   </div>
 
-                  {selectedOrder.total && (
-                    <p className="mt-3 font-bold text-lg text-right">Total: ₹{selectedOrder.total}</p>
+                  {selectedOrder.total_amount && (
+                    <p className="mt-3 font-bold text-lg text-right">Total: ₹{selectedOrder.total_amount}</p>
                   )}
                 </>
               );
