@@ -25,7 +25,7 @@ import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import ManageUsers from "./admin/ManageUsers";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
-
+import AdminProductDetail from "./admin/AdminProductDetail";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -72,6 +72,7 @@ function App() {
                        }>
           <Route index element={<AdminDashboard />} />
           <Route path="products" element={<ManageProducts />} />
+          <Route path="products/:id" element={<AdminProductDetail />} />
           <Route path="orders" element={<ManageOrders />} />
           <Route path="contacts" element={<ManageContacts />} />
           <Route path="users" element={<ManageUsers/>}/>

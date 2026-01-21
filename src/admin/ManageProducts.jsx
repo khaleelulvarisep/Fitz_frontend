@@ -5,7 +5,7 @@ import React, { useContext, useState } from "react";
 import { AdminContext } from "../context/AdminContext";
 import { FaPlus, FaTrash, FaEdit, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 function ManageProducts() {
   const { products, deleteProduct, addProduct, editProduct } = useContext(AdminContext);
   const [newProduct, setNewProduct] = useState({
@@ -13,17 +13,18 @@ function ManageProducts() {
     price: "",
     category: "",
     image: "",
+    description:"",
   });
+  const navigate = useNavigate();
   const [editingProduct, setEditingProduct] = useState(null);
 
   const handleAdd = () => {
-    if (!newProduct.name || !newProduct.price || !newProduct.category || !newProduct.image) {
+    if (!newProduct.name || !newProduct.price || !newProduct.category || !newProduct.image|| !newProduct.description) {
       toast.info("Please fill all fields");
       return;
     }
     addProduct(newProduct);
-    toast.success('New product added')
-    setNewProduct({ name: "", price: "", category: "", image: "" });
+    setNewProduct({ name: "", price: "", category: "", image: "" ,description:""});
   };
 
   const handleEditSave = () => {
@@ -32,7 +33,7 @@ function ManageProducts() {
       return;
     }
     editProduct(editingProduct.id, editingProduct);
-    toast.success('Product updated')
+    
     setEditingProduct(null);
   };
 
@@ -85,6 +86,13 @@ function ManageProducts() {
               onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
               className="border p-2 rounded-lg focus:ring-2 focus:ring-sky-400 shadow-sm"
             />
+             <input
+              type="text"
+              placeholder="Description"
+              value={newProduct.description}
+              onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+              className="border p-2 rounded-lg focus:ring-2 focus:ring-sky-400 shadow-sm"
+            />
           </div>
 
           <div className="mt-5 flex justify-end">
@@ -121,8 +129,9 @@ function ManageProducts() {
                   <tr
                     key={p.id}
                     className="border-b hover:bg-sky-50 transition-all duration-200"
+                      onClick={() => navigate(`/admin/products/${p.id}`)}
                   >
-                    <td className="p-3">
+                    <td className="p-3" >
                       <img
                         src={p.image}
                         alt={p.name}
@@ -135,14 +144,14 @@ function ManageProducts() {
                     <td className="p-3 text-center">
                       <div className="flex items-center justify-center gap-4">
                         <button
-                          onClick={() => setEditingProduct(p)}
+                          onClick={(e) => {e.stopPropagation();setEditingProduct(p);}}
                           title="Edit Product"
                           className="text-blue-600 hover:text-blue-800 transition-transform hover:scale-110"
                         >
                           <FaEdit />
                         </button>
                         <button
-                          onClick={() => {deleteProduct(p.id);toast.warn('Product deleted')}}
+                          onClick={(e) => {e.stopPropagation();deleteProduct(p.id);}}
                           title="Delete Product"
                           className="text-red-600 hover:text-red-800 transition-transform hover:scale-110"
                         >

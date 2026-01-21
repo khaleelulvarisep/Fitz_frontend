@@ -2,6 +2,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import api from "../api/axios";
+import { toast } from "react-toastify";
+
 export const AdminContext = createContext();
 
 export function AdminProvider({ children }) {
@@ -38,19 +40,21 @@ export function AdminProvider({ children }) {
     fetchAllData();
   }, []);
 
-  // const addProduct = async (product) => {
-  //   try {
-  //     const res = await axios.post(`${BASE_URL}/products`, product);
-  //     setProducts((prev) => [...prev, res.data]);
-  //   } catch (err) {
-  //     console.error("Error adding product:", err);
-  //   }
-  // };
+  const addProduct = async (product) => {
+    try {
+      const res = await api.post('admin/products/', product);
+      toast.success("Product added successfully");
+      setProducts((prev) => [...prev, res.data]);
+    } catch (err) {
+      console.error("Error adding product:", err);
+    }
+  };
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`${BASE_URL}/products/${id}`);
+      await api.delete(`admin/products/${id}/`);
       setProducts((prev) => prev.filter((p) => p.id !== id));
+      toast.warn('Product deleted');
     } catch (err) {
       console.error("Error deleting product:", err);
     }
@@ -58,8 +62,9 @@ export function AdminProvider({ children }) {
 
   const editProduct = async (id, updatedData) => {
     try {
-      const res = await axios.patch(`${BASE_URL}/products/${id}`, updatedData);
+      const res = await api.put(`admin/products/${id}/`, updatedData);
       setProducts((prev) => prev.map((p) => (p.id === id ? res.data : p)));
+      toast.success('Product updated');
     } catch (err) {
       console.error("Error editing product:", err);
     }
@@ -92,7 +97,7 @@ export function AdminProvider({ children }) {
         contacts,
         loading,
         fetchAllData,
-        // addProduct,
+        addProduct,
         editProduct,
         deleteProduct,
         deleteUser,
