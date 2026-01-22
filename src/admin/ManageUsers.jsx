@@ -29,8 +29,8 @@ function ManageUsers() {
 
   useEffect(() => {
     if (selectedUser) {
-      axios
-        .get(`http://localhost:5000/orders?userId=${selectedUser.id}`)
+      api
+        .get(`admin/orders/${selectedUser.id}/get/`)
         .then((res) => setOrders(res.data))
         .catch((err) => console.error("Error fetching user orders:", err));
     }
@@ -43,7 +43,7 @@ function ManageUsers() {
         'is_active':!user.is_active
       });
       fetchAllData();
-      // if (selectedUser?.id === user.id) setSelectedUser(updatedUser);
+      if (selectedUser?.id === user.id) setSelectedUser(updatedUser);
       if(user.is_active){
         toast.error('User blocked')
       }else{
@@ -193,23 +193,25 @@ function ManageUsers() {
                           </span>
                           <span
                             className={`text-xs font-semibold px-2 py-1 rounded-full ${
-                              o.status === "Delivered"
-                                ? "bg-green-100 text-green-700"
-                                : o.status === "Shipped"
-                                ? "bg-blue-100 text-blue-700"
-                                : o.status === "Cancelled"
-                                ? "bg-red-100 text-red-700"
-                                : "bg-yellow-100 text-yellow-700"
+                               o.status === "PLACED"
+                            ? "bg-yellow-200 text-yellow-800"
+                            :  o.status === "SHIPPED"
+                            ? "bg-blue-200 text-blue-800"
+                            : o.status === "DELIVERED"
+                            ? "bg-green-200 text-green-800"
+                            : o.status === "CANCELLED"
+                            ? "bg-red-200 text-red-800"
+                            : "bg-gray-200 text-gray-800"
                             }`}
                           >
                             {o.status}
                           </span>
                         </div>
                         <p className="text-sm text-gray-700">
-                          <strong>Total:</strong> ₹{o.total}
+                          <strong>Total:</strong> ₹{o.total_amount}
                         </p>
                         <p className="text-sm text-gray-500">
-                          {new Date(o.date).toLocaleString()}
+                          {new Date(o.created_at).toLocaleString()}
                         </p>
                       </div>
                     ))}

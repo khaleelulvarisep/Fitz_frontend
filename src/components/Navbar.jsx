@@ -13,7 +13,7 @@ function Navbar() {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
       
-        <div className="text-2xl font-bold text-sky-600">
+        <div className="text-4xl font-bold text-sky-600">
           <Link to="/">FiTz.</Link>
         </div>
 

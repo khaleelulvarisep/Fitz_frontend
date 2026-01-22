@@ -18,8 +18,10 @@ function AdminDashboard() {
   // 📊 Calculations
   const totalUsers = users.length; 
   const totalOrders = orders.length;
-  const totalRevenue = orders.reduce((sum, order) => sum + (order.total_amount || 0), 0);
-  const recentOrders = [...orders]
+const totalRevenue = orders.reduce(
+  (sum, order) => sum + Number(order.total_amount || 0),
+  0
+);  const recentOrders = [...orders]
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     .slice(0, 5); // show latest 6 orders
 
