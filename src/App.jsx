@@ -26,7 +26,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import ManageUsers from "./admin/ManageUsers";
 import ProtectedAdminRoute from "./components/ProtectedAdminRoute";
 import AdminProductDetail from "./admin/AdminProductDetail";
-
+import './App.css'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
