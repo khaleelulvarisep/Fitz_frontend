@@ -124,6 +124,10 @@ import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
 
 function Cart() {
+ 
+       useEffect(() => {
+          window.scrollTo(0, 0);
+        }, []);
   const { cart, updateCartItem, removeFromCart } = useContext(UserContext);
   const token = localStorage.getItem("access");
   const navigate = useNavigate();
