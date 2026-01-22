@@ -198,6 +198,9 @@ import FashionCarousel from "../components/FashionCarousel";
 import { toast } from "react-toastify";
 
 function Home() {
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const {
     user,
     cart,
