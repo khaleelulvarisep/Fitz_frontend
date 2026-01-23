@@ -118,10 +118,10 @@ function Footer() {
           <div className="md:col-span-3 space-y-6">
             <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-sky-500">Navigation</h3>
             <ul className="space-y-4">
-              <li><Link to="/" className="text-sm text-slate-300 hover:text-white transition-colors">Collection</Link></li>
-              <li><Link to="/about" className="text-sm text-slate-300 hover:text-white transition-colors">Our Story</Link></li>
+              <li><Link to="/" className="text-sm text-slate-300 hover:text-white transition-colors">Home</Link></li>
+              <li><Link to="/about" className="text-sm text-slate-300 hover:text-white transition-colors">About</Link></li>
               <li><Link to="/wishlist" className="text-sm text-slate-300 hover:text-white transition-colors">Wishlist</Link></li>
-              <li><Link to="/contact" className="text-sm text-slate-300 hover:text-white transition-colors">Support</Link></li>
+              <li><Link to="/cart" className="text-sm text-slate-300 hover:text-white transition-colors">Cart</Link></li>
             </ul>
           </div>
 

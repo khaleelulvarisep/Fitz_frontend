@@ -143,10 +143,11 @@
 
 import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../context/AdminContext";
-
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function AdminDashboard() {
   const { users, orders, loading, fetchAllData } = useContext(AdminContext);
-
+  const navigate=useNavigate();
   useEffect(() => {
     if (!users.length || !orders.length) fetchAllData();
   }, []);
@@ -182,12 +183,12 @@ function AdminDashboard() {
             <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Executive Overview</h1>
             <p className="text-slate-500 mt-1">Metrics and recent activity across your platform.</p>
           </div>
-          <button 
+          {/* <button 
             onClick={() => fetchAllData()} 
             className="flex items-center justify-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
           >
             <span>🔄</span> Refresh Data
-          </button>
+          </button> */}
         </header>
 
         {/* Analytics Grid */}
@@ -232,7 +233,7 @@ function AdminDashboard() {
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-white">
             <h2 className="text-xl font-bold text-slate-900">Recent Transactions</h2>
-            <button className="text-sky-600 hover:text-sky-700 text-sm font-bold transition">View All Orders →</button>
+            <button onClick={()=>navigate('/admin/orders')} className="text-sky-600 hover:text-sky-700 text-sm font-bold transition">View All Orders →</button>
           </div>
 
           {orders.length === 0 ? (

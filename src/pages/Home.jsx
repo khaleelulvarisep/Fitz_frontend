@@ -217,12 +217,31 @@ function Home() {
   const [categoryFilter, setCategoryFilter] = useState("all");
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8000/api/products/")
+  //     .then((res) => setProducts(res.data))
+  //     .catch((err) => console.error(err));
+  // }, []);
+
+
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/products/")
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/products/", {
+        params: {
+          search: search,
+          category: categoryFilter,
+        },
+      });
+      setProducts(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchProducts();
+}, [search, categoryFilter]);
 
   const handleAddToCart = (productId) => {
     if (!token) {
@@ -258,11 +277,11 @@ function Home() {
     }
   };
 
-  const filteredProducts = products.filter((p) => {
-    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = categoryFilter === "all" ? true : p.category.toLowerCase() === categoryFilter;
-    return matchesSearch && matchesCategory;
-  });
+  // const filteredProducts = products.filter((p) => {
+  //   const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
+  //   const matchesCategory = categoryFilter === "all" ? true : p.category.toLowerCase() === categoryFilter;
+  //   return matchesSearch && matchesCategory;
+  // });
 
   return (
     <div className="bg-[#fcfcfd] min-h-screen pb-20">
@@ -310,9 +329,9 @@ function Home() {
         </div>
 
         {/* --- Product Grid (Increased to 5 columns on large screens) --- */}
-        {filteredProducts.length > 0 ? (
+        {products.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-            {filteredProducts.map((product) => {
+            {products.map((product) => {
               const isWishlisted = wishlist?.items?.some((item) => item.product === product.id);
               const isInCart = cart?.items?.some((item) => item.product === product.id);
 

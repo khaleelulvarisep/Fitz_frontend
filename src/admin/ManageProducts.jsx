@@ -352,9 +352,20 @@ function ManageProducts() {
                         <p className="text-xs text-slate-400 mt-0.5 truncate max-w-[150px]">{p.description || "No description provided."}</p>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-[10px] font-black uppercase tracking-tighter bg-slate-100 text-slate-600 px-2 py-1 rounded">
+                        {/* <span className="text-[10px] font-black uppercase tracking-tighter bg-slate-100 text-slate-600 px-2 py-1 rounded">
                           {p.category}
-                        </span>
+                        </span> */}
+                        <span
+                         className={`text-[10px] font-black uppercase tracking-tighter px-2 py-1 rounded 
+                           ${
+                             p.category === "men"
+                             ? "bg-blue-100 text-blue-700"
+                             : p.category === "women"
+                              ? "bg-rose-100 text-rose-700"
+                              : "bg-slate-100 text-slate-600"
+                            }`}>
+                                {p.category}
+                          </span>
                       </td>
                       <td className="px-6 py-4 font-black text-slate-900">₹{p.price}</td>
                       <td className="px-6 py-4 text-right">
