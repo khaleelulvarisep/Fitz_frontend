@@ -65,6 +65,10 @@ import { toast } from "react-toastify";
 import api from "../api/axios";
 
 function UserProfile() {
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const { user, logout, token } = useContext(UserContext);
   const[orders,setOrders]=useState([])
   const navigate = useNavigate();
@@ -124,7 +128,7 @@ function UserProfile() {
                 </div>
                 <div className="text-left">
                   <p className="font-black text-slate-900 text-sm uppercase tracking-tight">Personal Info</p>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase">Update name & email</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase">Update name & password</p>
                 </div>
               </div>
               <FaChevronRight className="text-slate-200 group-hover:text-sky-600 transition-all" size={12} />

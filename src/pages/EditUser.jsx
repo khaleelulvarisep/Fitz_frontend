@@ -1,127 +1,119 @@
+
 // import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 // import { toast } from "react-toastify";
+// import api from "../api/axios"; // ✅ USE YOUR AXIOS INSTANCE
 
 // function EditUser() {
-//   const [user, setUser] = useState(null);
 //   const [formData, setFormData] = useState({
 //     name: "",
 //     password: "",
 //     confirmPassword: "",
 //   });
 //   const [loading, setLoading] = useState(true);
+
 //   const navigate = useNavigate();
 
-//   const storedUser = JSON.parse(localStorage.getItem("user"));
-
+//   /* ================= FETCH CURRENT USER ================= */
 //   useEffect(() => {
-//     if (storedUser?.id) {
-//       axios
-//         .get(`http://localhost:5000/users/${storedUser.id}`)
-//         .then((res) => {
-//           setUser(res.data);
-//           setFormData({
-//             name: res.data.name,
-//             password: "",
-//             confirmPassword: "",
-//           });
-//         })
-//         .catch((err) => console.error("Error fetching user:", err))
-//         .finally(() => setLoading(false));
-//     } else {
-//       setLoading(false);
-//     }
+//     api
+//       .get("auth/me/")
+//       .then((res) => {
+//         setFormData({
+//           name: res.data.name || "",
+//           password: "",
+//           confirmPassword: "",
+//         });
+//       })
+//       .catch(() => {
+//         toast.error("Please login again");
+//         navigate("/login");
+//       })
+//       .finally(() => setLoading(false));
 //   }, []);
 
+//   /* ================= HANDLE CHANGE ================= */
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
 //     setFormData((prev) => ({ ...prev, [name]: value }));
 //   };
 
+//   /* ================= SUBMIT ================= */
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 
 //     const { name, password, confirmPassword } = formData;
 
-//     if (!name || !password || !confirmPassword) {
-//       toast.info("Please fill in all fields.");
+//     if (!name) {
+//       toast.info("Name is required");
 //       return;
 //     }
 
-//     if (password !== confirmPassword) {
-//      toast.error("Passwords do not match.");
+//     if (password && password !== confirmPassword) {
+//       toast.error("Passwords do not match");
 //       return;
 //     }
 
 //     try {
-//       const updatedUser = {
-//         ...user,
-//         name,
-//         password,
-//       };
+//       const payload = { name };
 
-//       await axios.patch(`http://localhost:5000/users/${user.id}`, updatedUser);
+//       if (password) {
+//         payload.password = password;
+//       }
 
-//       localStorage.setItem("user", JSON.stringify(updatedUser));
-//      toast.success("Profile updated successfully!");
+//       await api.patch("auth/me/", payload);
+
+//       toast.success("Profile updated successfully");
 //       navigate("/user");
 //     } catch (err) {
-//       console.error("Error updating user:", err);
-//       toast.error("Failed to update profile. Try again.");
+//       console.error(err);
+//       toast.error("Failed to update profile");
 //     }
 //   };
 
-//   if (loading)
+//   if (loading) {
 //     return (
-//       <div className="flex justify-center items-center h-screen text-sky-600 text-xl font-semibold">
+//       <div className="flex justify-center items-center h-screen text-xl">
 //         Loading...
 //       </div>
 //     );
+//   }
 
-//   if (!user)
-//     return (
-//       <div className="flex justify-center items-center h-screen text-red-600 text-lg font-medium">
-//         No user found. Please log in.
-//       </div>
-//     );
-
+//   /* ================= UI ================= */
 //   return (
-//     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-sky-50 to-sky-100 py-10">
-//       <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-md border border-sky-100 flex flex-col">
-//         <h2 className="text-3xl font-bold text-sky-700 text-center mb-6">
+//     <div className="flex justify-center items-center min-h-screen bg-sky-50">
+//       <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
+//         <h2 className="text-2xl font-bold text-center mb-6">
 //           Edit Profile
 //         </h2>
 
 //         <form onSubmit={handleSubmit} className="space-y-4">
 //           <div>
-//             <label className="block text-gray-700 font-medium mb-1">
-//               Name
-//             </label>
+//             <label className="block mb-1 font-medium">Name</label>
 //             <input
 //               type="text"
 //               name="name"
 //               value={formData.name}
 //               onChange={handleChange}
-//               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
+//               className="w-full px-4 py-2 border rounded"
 //             />
 //           </div>
 
 //           <div>
-//             <label className="block text-gray-700 font-medium mb-1">
-//               Password
+//             <label className="block mb-1 font-medium">
+//               New Password (optional)
 //             </label>
 //             <input
 //               type="password"
 //               name="password"
 //               value={formData.password}
 //               onChange={handleChange}
-//               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
+//               className="w-full px-4 py-2 border rounded"
 //             />
 //           </div>
 
 //           <div>
-//             <label className="block text-gray-700 font-medium mb-1">
+//             <label className="block mb-1 font-medium">
 //               Confirm Password
 //             </label>
 //             <input
@@ -129,13 +121,13 @@
 //               name="confirmPassword"
 //               value={formData.confirmPassword}
 //               onChange={handleChange}
-//               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500"
+//               className="w-full px-4 py-2 border rounded"
 //             />
 //           </div>
 
 //           <button
 //             type="submit"
-//             className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all"
+//             className="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700"
 //           >
 //             Save Changes
 //           </button>
@@ -150,11 +142,11 @@
 
 
 
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import api from "../api/axios"; // ✅ USE YOUR AXIOS INSTANCE
+import { FaUserEdit, FaLock, FaChevronLeft, FaShieldAlt } from "react-icons/fa";
+import api from "../api/axios";
 
 function EditUser() {
   const [formData, setFormData] = useState({
@@ -163,11 +155,10 @@ function EditUser() {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(true);
-
   const navigate = useNavigate();
 
-  /* ================= FETCH CURRENT USER ================= */
   useEffect(() => {
+    window.scrollTo(0, 0);
     api
       .get("auth/me/")
       .then((res) => {
@@ -182,18 +173,15 @@ function EditUser() {
         navigate("/login");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [navigate]);
 
-  /* ================= HANDLE CHANGE ================= */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  /* ================= SUBMIT ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { name, password, confirmPassword } = formData;
 
     if (!name) {
@@ -208,82 +196,115 @@ function EditUser() {
 
     try {
       const payload = { name };
-
-      if (password) {
-        payload.password = password;
-      }
+      if (password) payload.password = password;
 
       await api.patch("auth/me/", payload);
-
       toast.success("Profile updated successfully");
       navigate("/user");
     } catch (err) {
-      console.error(err);
       toast.error("Failed to update profile");
     }
   };
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen text-xl">
-        Loading...
+      <div className="min-h-screen flex items-center justify-center bg-[#fcfcfd]">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-sky-600"></div>
       </div>
     );
   }
 
-  /* ================= UI ================= */
   return (
-    <div className="flex justify-center items-center min-h-screen bg-sky-50">
-      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Edit Profile
-        </h2>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="bg-[#fcfcfd] min-h-screen flex items-center justify-center py-20 px-6">
+      <div className="max-w-4xl w-full grid md:grid-cols-12 gap-0 bg-white shadow-2xl shadow-slate-200/50 rounded-[3rem] overflow-hidden border border-slate-100">
+        
+        {/* Left Side: Branding/Instruction */}
+        <div className="md:col-span-4 bg-slate-950 p-10 text-white flex flex-col justify-between">
           <div>
-            <label className="block mb-1 font-medium">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded"
-            />
+            <button 
+              onClick={() => navigate("/user")}
+              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-colors mb-12"
+            >
+              <FaChevronLeft size={8}/> Back to Profile
+            </button>
+            <h2 className="text-3xl font-black tracking-tighter uppercase italic leading-tight">
+              Update <br />
+              <span className="text-sky-500">Identity.</span>
+            </h2>
+            <p className="text-slate-400 text-xs mt-6 leading-loose font-medium">
+              Keep your personal information secure. Changes to your password will require a new login session.
+            </p>
           </div>
-
-          <div>
-            <label className="block mb-1 font-medium">
-              New Password (optional)
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded"
-            />
+          
+          <div className="flex items-center gap-3 text-emerald-500 bg-emerald-500/10 p-4 rounded-2xl">
+            <FaShieldAlt size={16} />
+            <span className="text-[9px] font-black uppercase tracking-widest leading-none">End-to-end <br /> encrypted</span>
           </div>
+        </div>
 
-          <div>
-            <label className="block mb-1 font-medium">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded"
-            />
-          </div>
+        {/* Right Side: Form */}
+        <div className="md:col-span-8 p-10 md:p-16">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Name Field */}
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">
+                <FaUserEdit size={12} className="text-sky-600" /> Display Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Full Name"
+                className="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-sky-500 transition-all text-sm font-bold text-slate-900"
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700"
-          >
-            Save Changes
-          </button>
-        </form>
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Password Field */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">
+                  <FaLock size={10} className="text-sky-600" /> New Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-sky-500 transition-all text-sm font-bold text-slate-900"
+                />
+              </div>
+
+              {/* Confirm Password Field */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-sky-500 transition-all text-sm font-bold text-slate-900"
+                />
+              </div>
+            </div>
+
+            <div className="pt-6">
+              <button
+                type="submit"
+                className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] hover:bg-sky-600 transition-all shadow-xl shadow-slate-200 active:scale-95 flex items-center justify-center gap-3"
+              >
+                Save Profile Changes
+              </button>
+              <p className="text-center text-[9px] font-bold text-slate-300 uppercase tracking-widest mt-6">
+                Personalized for FiTz. Collective Members
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -1,162 +1,342 @@
 
+// import React, { useState } from "react";
+// import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+
+// function Register() {
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [confirmPassword, setConfirmPassword] = useState("");
+//   const [message, setMessage] = useState("");
+//   const navigate = useNavigate();
+
+//   const validateEmail = (email) => {
+//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return regex.test(email);
+//   };
+
+//   const validatePassword = (password) => {
+    
+//     const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/;
+//     return regex.test(password);
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+   
+//     if (!name || !email || !password || !confirmPassword) {
+//       setMessage("Please fill in all fields");
+//       return;
+//     }
+
+//     if (name.length < 3) {
+//       setMessage(" Name must be at least 3 characters long");
+//       return;
+//     }
+
+//     if (!validateEmail(email)) {
+//       setMessage("Please enter a valid email address");
+//       return;
+//     }
+
+//     if (!validatePassword(password)) {
+//       setMessage(
+//         " Password must be at least 6 characters and include a number & special character"
+//       );
+//       return;
+//     }
+
+//     if (password !== confirmPassword) {
+//       setMessage(" Passwords do not match");
+//       return;
+//     }
+
+//     try {
+      
+//       const newUser = { 
+//         name, 
+//         email, 
+//         password, 
+//         isAdmin:false,
+//         cart: [], 
+//         wishlist: [] 
+//       };
+
+//       // await axios.post("http://localhost:5000/users", newUser);
+//       await axios.post("http://localhost:8000/api/auth/register/", {
+//   name: name,
+//   email: email,
+//   password: password,
+//   confirm_password: confirmPassword
+// });//neww
+
+//       setMessage("✅ User registered successfully!");
+
+     
+//       setName("");
+//       setEmail("");
+//       setPassword("");
+//       setConfirmPassword("");
+
+//       setTimeout(() => {
+//         navigate("/login");
+//       }, 1500);
+//     } catch (err) {
+//       console.error(err);
+//       setMessage(" Error registering user");
+//     }
+//   };
+
+//   return (
+//     <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-md rounded-lg">
+//       <h2 className="text-2xl font-bold text-sky-600 mb-6 text-center">
+//         Register
+//       </h2>
+
+//       {message && (
+//         <div className="mb-4 text-center text-red-600 font-medium">{message}</div>
+//       )}
+
+//       <form onSubmit={handleSubmit} className="space-y-4">
+       
+//         <div>
+//           <label className="block mb-1 font-medium text-gray-700">Name</label>
+//           <input
+//             type="text"
+//             value={name}
+//             onChange={(e) => setName(e.target.value)}
+//             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+//           />
+//         </div>
+
+        
+//         <div>
+//           <label className="block mb-1 font-medium text-gray-700">Email</label>
+//           <input
+//             type="email"
+//             value={email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+//           />
+//         </div>
+
+        
+//         <div>
+//           <label className="block mb-1 font-medium text-gray-700">Password</label>
+//           <input
+//             type="password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+//           />
+//         </div>
+
+        
+//         <div>
+//           <label className="block mb-1 font-medium text-gray-700">
+//             Confirm Password
+//           </label>
+//           <input
+//             type="password"
+//             value={confirmPassword}
+//             onChange={(e) => setConfirmPassword(e.target.value)}
+//             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
+//           />
+//         </div>
+
+        
+//         <button
+//           type="submit"
+//           className="w-full bg-sky-600 text-white py-2 rounded-lg hover:bg-sky-700 transition"
+//         >
+//           Register
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default Register;
+
+
+
+
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { FaUser, FaEnvelope, FaLock, FaChevronRight, FaStar } from "react-icons/fa";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    
-    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/;
-    return regex.test(password);
-  };
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validatePassword = (password) => /^(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/.test(password);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   
     if (!name || !email || !password || !confirmPassword) {
-      setMessage("Please fill in all fields");
+      toast.info("Please fill in all fields");
       return;
     }
-
     if (name.length < 3) {
-      setMessage(" Name must be at least 3 characters long");
+      toast.warn("Name is too short");
       return;
     }
-
     if (!validateEmail(email)) {
-      setMessage("Please enter a valid email address");
+      toast.error("Invalid email address");
       return;
     }
-
     if (!validatePassword(password)) {
-      setMessage(
-        " Password must be at least 6 characters and include a number & special character"
-      );
+      toast.error("Password must include a number & special character");
       return;
     }
-
     if (password !== confirmPassword) {
-      setMessage(" Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
+    setLoading(true);
     try {
-      
-      const newUser = { 
-        name, 
-        email, 
-        password, 
-        isAdmin:false,
-        cart: [], 
-        wishlist: [] 
-      };
-
-      // await axios.post("http://localhost:5000/users", newUser);
       await axios.post("http://localhost:8000/api/auth/register/", {
-  name: name,
-  email: email,
-  password: password,
-  confirm_password: confirmPassword
-});//neww
+        name,
+        email,
+        password,
+        confirm_password: confirmPassword
+      });
 
-      setMessage("✅ User registered successfully!");
-
-     
-      setName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
+      toast.success("Welcome to the Collective!");
+      setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
-      console.error(err);
-      setMessage(" Error registering user");
+      toast.error("Registration failed. Email might already exist.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold text-sky-600 mb-6 text-center">
-        Register
-      </h2>
+    <div className="min-h-screen flex items-center justify-center bg-[#fcfcfd] py-12 px-6">
+      <div className="max-w-5xl w-full grid md:grid-cols-2 bg-white rounded-[3rem] shadow-2xl shadow-slate-200/50 overflow-hidden border border-slate-100">
+        
+        {/* Left Side: Brand Story */}
+        <div className="hidden md:flex flex-col justify-between p-12 bg-slate-950 text-white relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+          
+          <div className="relative z-10">
+            <h1 className="text-5xl font-black italic tracking-tighter mb-6">
+              FiTz<span className="text-sky-500">.</span>
+            </h1>
+            <h2 className="text-xl font-bold uppercase tracking-widest leading-tight text-slate-200">
+              Join the <br /> Collective
+            </h2>
+            <p className="text-slate-400 text-xs mt-6 leading-loose font-medium max-w-[280px]">
+              Create an account to save your curation, track bespoke orders, and receive early access to seasonal drops.
+            </p>
+          </div>
 
-      {message && (
-        <div className="mb-4 text-center text-red-600 font-medium">{message}</div>
-      )}
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-       
-        <div>
-          <label className="block mb-1 font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
-          />
+          <div className="relative z-10 space-y-6">
+            <div className="flex items-center gap-4 group">
+              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition-all">
+                <FaStar size={14} />
+              </div>
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest">Priority Access</p>
+                <p className="text-[9px] text-slate-500 font-bold uppercase mt-0.5">Members only seasonal drops</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        
-        <div>
-          <label className="block mb-1 font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
-          />
-        </div>
+        {/* Right Side: Register Form */}
+        <div className="p-10 md:p-16">
+          <header className="mb-10">
+            <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase italic">Register</h2>
+            <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em] mt-2">Start your journey</p>
+          </header>
 
-        
-        <div>
-          <label className="block mb-1 font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
-          />
-        </div>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 flex items-center gap-2">
+                <FaUser size={10} className="text-sky-500" /> Full Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Alexander Fitz"
+                className="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-sky-500 transition-all text-sm font-bold"
+              />
+            </div>
 
-        
-        <div>
-          <label className="block mb-1 font-medium text-gray-700">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
-          />
-        </div>
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 flex items-center gap-2">
+                <FaEnvelope size={10} className="text-sky-500" /> Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="alex@example.com"
+                className="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-sky-500 transition-all text-sm font-bold"
+              />
+            </div>
 
-        
-        <button
-          type="submit"
-          className="w-full bg-sky-600 text-white py-2 rounded-lg hover:bg-sky-700 transition"
-        >
-          Register
-        </button>
-      </form>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 flex items-center gap-2">
+                  <FaLock size={10} className="text-sky-500" /> Password
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-sky-500 transition-all text-sm font-bold"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Confirm</label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-sky-500 transition-all text-sm font-bold"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full mt-4 bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] hover:bg-sky-600 transition-all shadow-xl shadow-slate-200 active:scale-95 flex items-center justify-center gap-3 group"
+            >
+              {loading ? "Creating Profile..." : (
+                <>
+                  Create Account <FaChevronRight size={10} className="group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-10 text-center">
+            <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-4">Already a member?</p>
+            <Link to="/login" className="text-sky-600 font-black uppercase tracking-[0.2em] text-[11px] hover:text-slate-900 transition-colors">
+              Sign In to FiTz.
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default Register;
-
