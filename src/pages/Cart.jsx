@@ -413,7 +413,7 @@ function Cart() {
               </button>
               
               <p className="text-center text-[9px] font-bold text-slate-300 uppercase tracking-widest mt-6">
-                Complimentary 7-day returns on all orders
+                Complimentary 7-day returns on all orders.
               </p>
             </div>
           </div>
