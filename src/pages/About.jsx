@@ -64,7 +64,7 @@ function About() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col items-center text-center space-y-4">
             <span className="text-sky-600 text-[10px] font-black uppercase tracking-[0.4em]">
-              Established 2024
+              Established 2025
             </span>
             <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter uppercase italic">
               The <span className="text-sky-600">FiTz.</span> Story
@@ -90,10 +90,10 @@ function About() {
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
               />
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-50 hidden md:block">
+            {/* <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-50 hidden md:block">
               <p className="text-3xl font-black text-sky-600">100%</p>
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Premium Quality</p>
-            </div>
+            </div> */}
           </div>
 
           {/* Text Side */}
