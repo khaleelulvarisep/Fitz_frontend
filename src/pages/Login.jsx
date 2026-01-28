@@ -478,12 +478,44 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaEnvelope, FaLock, FaArrowRight, FaFingerprint,FaEye,FaEyeSlash } from "react-icons/fa";
 
+
+
+
+
+import { GoogleLogin } from '@react-oauth/google';
+
+
+
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({}); // 👈 NEW
   const[showPassword,setShowPassword]=useState(false)
+
+
+ const handleGoogleLogin = async (credentialResponse) => {
+  try {
+    const res = await axios.post("http://localhost:8000/api/auth/google/", {
+      provider: "google",
+      access_token: credentialResponse.credential,
+    });
+
+    localStorage.setItem("access", res.data.access);
+    localStorage.setItem("refresh", res.data.refresh);
+
+    toast.success("Logged in with Google!");
+    window.location.href = "/";
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+    toast.error("Google login failed");
+  }
+};
+
+
+
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -547,11 +579,11 @@ function Login() {
             <p className="text-slate-400 text-sm font-medium leading-relaxed max-w-[240px]">
               Access your curated collection and personalized style dashboard.
             </p>
-            <img
+            {/* <img
       src="https://www.pinterest.com/pin/1337074879282252/"   // replace with your actual image path
       alt="Fashion preview"
       className="w-56 h-auto rounded-xl shadow-lg object-cover"
-    />
+    /> */}
           </div>
 
           <div className="relative z-10">
@@ -661,6 +693,12 @@ function Login() {
             >
               Create Account <FaFingerprint size={14} className="group-hover:scale-110 transition-transform" />
             </Link>
+            <div className="mt-6 flex justify-center">
+  <GoogleLogin
+    onSuccess={handleGoogleLogin}
+    onError={() => toast.error("Google Sign In Failed")}
+  />
+</div>
           </div>
         </div>
       </div>

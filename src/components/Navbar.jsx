@@ -174,7 +174,7 @@ function Navbar() {
     { name: "Cart", path: "/cart", icon: <FaShoppingCart /> },
     { name: "Wishlist", path: "/wishlist", icon: <FaHeart /> },
     { name: "About", path: "/about", icon: <FaInfoCircle /> },
-    { name: "Contact", path: "/contact", icon: <FaPhoneAlt /> },
+    // { name: "Contact", path: "/contact", icon: <FaPhoneAlt /> },
   ];
 
   return (
@@ -202,7 +202,7 @@ function Navbar() {
                     : "text-slate-600 hover:text-sky-600 hover:bg-slate-50"
                 }`}
               >
-                {link.name}
+                {link.icon}{link.name} 
               </Link>
             </li>
           ))}
