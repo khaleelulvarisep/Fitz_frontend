@@ -148,7 +148,7 @@ function ProductDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/products/${id}/`)
+      .get(`http://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/products/${id}/`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.error("Error fetching product details:", err));
   }, [id]);

@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: "http://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/",
 });
 
 api.interceptors.request.use((config) => {
@@ -28,7 +28,7 @@ api.interceptors.response.use(
       try {
         const refresh = localStorage.getItem("refresh");
         const res = await axios.post(
-          "http://localhost:8000/api/auth/token/refresh/",
+          "http://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/auth/token/refresh/",
           { refresh }
         );
 
