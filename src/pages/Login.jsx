@@ -27,7 +27,7 @@ function Login() {
 
  const handleGoogleLogin = async (credentialResponse) => {
   try {
-    const res = await axios.post("http://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/auth/google/", {
+    const res = await axios.post("https://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/auth/google/", {
       provider: "google",
       access_token: credentialResponse.credential,
     });
