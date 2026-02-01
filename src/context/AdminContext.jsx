@@ -13,7 +13,7 @@ export function AdminProvider({ children }) {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://www.fitzs.online";
 
   const fetchAllData = async () => {
     setLoading(true);

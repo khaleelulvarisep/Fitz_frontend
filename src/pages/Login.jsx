@@ -27,7 +27,7 @@ function Login() {
 
  const handleGoogleLogin = async (credentialResponse) => {
   try {
-    const res = await axios.post("https://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/auth/google/", {
+    const res = await axios.post("https://www.fitzs.online/api/auth/google/", {
       provider: "google",
       access_token: credentialResponse.credential,
     });
@@ -62,7 +62,7 @@ function Login() {
 
     setLoading(true);
     try {
-      const res = await axios.post("https://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/auth/login/", {
+      const res = await axios.post("https://www.fitzs.online/api/auth/login/", {
         email,
         password,
       });

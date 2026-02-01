@@ -228,7 +228,7 @@ function Home() {
   useEffect(() => {
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/products/", {
+      const res = await axios.get("https://www.fitzs.online/api/products/", {
         params: {
           search: search,
           category: categoryFilter,
