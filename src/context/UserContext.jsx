@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState(null);
 
   const[user,setUser]=useState(null)
+  const[userLoading,setUserLoading]=useState(true);
   const [loadingCart, setLoadingCart] = useState(true);
   const token=localStorage.getItem('access');
   /* ================= INIT AUTH ================= */
@@ -37,6 +38,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUser = async () => {
     const res = await api.get("auth/me/");
+    setUserLoading(false);
     setUser(res.data);
   };
 
@@ -102,6 +104,7 @@ const removeFromWishlist = async (productId) => {
       value={{
         logout,
         user,
+        userLoading,
         token,
         setUser,
         cart,
