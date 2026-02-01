@@ -50,7 +50,7 @@ function Register() {
 
     setLoading(true);
     try {
-      await axios.post("http://fitzbackend-env.eba-ygza6tbr.eu-north-1.elasticbeanstalk.com/api/auth/register/", {
+      await axios.post("https://www.fitzs.online/api/auth/register/", {
         name,
         email,
         password,
