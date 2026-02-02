@@ -255,6 +255,7 @@ function Checkout() {
 
       if (paymentMethod === "COD") {
         toast.success("Order placed successfully!");
+        cart=null
         navigate("/orders");
         return;
       }
