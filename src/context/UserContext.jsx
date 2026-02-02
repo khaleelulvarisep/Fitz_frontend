@@ -59,6 +59,7 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setCart(null);
+    setWishlist(null);
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
   };
