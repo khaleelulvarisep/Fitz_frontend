@@ -18,12 +18,17 @@ import { GoogleLogin } from '@react-oauth/google';
 
 
 function Login() {
+
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({}); // 👈 NEW
   const[showPassword,setShowPassword]=useState(false)
-
+  
 
  const handleGoogleLogin = async (credentialResponse) => {
   try {
