@@ -159,11 +159,11 @@ function AdminLayout() {
           </NavLink>
 
           {/* Contact/Support Management */}
-          <NavLink to="/admin/contacts" className={navLinkClass}>
+          {/* <NavLink to="/admin/contacts" className={navLinkClass}>
             <FaEnvelope className="text-lg" />
             <span className="font-semibold text-sm">Manage Contacts</span>
-          </NavLink>
-        </nav>
+          </NavLink> */}
+        </nav>     
 
         {/* User / Logout Section at Bottom */}
         <div className="p-4 mt-auto border-t border-slate-800">
